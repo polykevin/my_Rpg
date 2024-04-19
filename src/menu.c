@@ -20,21 +20,23 @@ static void init_texture_filename(menu_t *menu)
     menu->texture_filenames[2] = "options.png";
 }
 
-void create_buttons_menu(menu_t *menu, button_menu_t *button)
+void create_buttons_menu(menu_t *menu)
 {
     sfVector2f pos = (sfVector2f){300, 400};
 
     for (int i = 0; i < 3; i++) {
         menu->buttons[i] = create_button(menu->texture_filenames[i]);
     }
-        sfSprite_setPosition(menu->buttons[0]->sprite, (sfVector2f){300, 400});
+        //sfSprite_setPosition(menu->buttons[0]->sprite, (sfVector2f){300, 400});
 }
 
 void create_menu(menu_t *menu)
 {
+    menu->buttons = malloc(sizeof(button_menu_t *) * 3);
     menu->texture = sfTexture_createFromFile("sky_menu.png", NULL);
     menu->sprite = sfSprite_create();
 
     sfSprite_setTexture(menu->sprite, menu->texture, sfTrue);
     sfSprite_setScale(menu->sprite, (sfVector2f){8, 8});
+    create_buttons_menu(menu);
 }

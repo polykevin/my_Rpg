@@ -8,7 +8,7 @@
 #include "game.h"
 #include "menu.h"
 
-button_menu_t *create_button(char **texture_filename)
+button_menu_t *create_button(char *texture_filename)
 {
     button_menu_t *button = malloc(sizeof(button_menu_t));
 

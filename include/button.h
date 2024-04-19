@@ -17,6 +17,6 @@ typedef struct button_menu {
     sfTexture *texture;
 }button_menu_t;
 
-button_menu_t *create_button(char **texture_filename);
+button_menu_t *create_button(char *texture_filename);
 
 #endif // !BUTTON_H
