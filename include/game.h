@@ -22,6 +22,7 @@ typedef struct text {
 typedef struct game {
     sfVideoMode mode;
     sfRenderWindow *window;
+    menu_t menu;
     sfEvent event;
     sprite_t player;
 }game_t;
