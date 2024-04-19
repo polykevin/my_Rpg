@@ -4,6 +4,7 @@
 ** File description:
 ** button
 */
+#include <stdlib.h>
 #include "button.h"
 #include "game.h"
 #include "menu.h"
