@@ -62,6 +62,8 @@ static void render(game_t *g)
     sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->menu.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->menu.buttons[0]->sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->menu.buttons[1]->sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->menu.buttons[2]->sprite, NULL);
     sfRenderWindow_display(g->window);
 }
 

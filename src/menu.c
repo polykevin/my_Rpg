@@ -22,13 +22,16 @@ static void init_texture_filename(menu_t *menu)
 }
 
 void create_buttons_menu(menu_t *menu)
-{
-    sfVector2f pos = (sfVector2f){300, 400};
+{   
+    int x = 765;
+    int y = 225;
 
     for (int i = 0; i < 3; i++) {
         menu->buttons[i] = create_button(menu->texture_filenames[i]);
+        sfSprite_setScale(menu->buttons[i]->sprite, (sfVector2f){0.5, 0.5});
+        sfSprite_setPosition(menu->buttons[i]->sprite, (sfVector2f){x, y});
+        y += 200;
     }
-        //sfSprite_setPosition(menu->buttons[0]->sprite, (sfVector2f){300, 400});
 }
 
 void create_menu(menu_t *menu)
