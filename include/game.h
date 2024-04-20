@@ -26,7 +26,7 @@ typedef struct game {
     sfEvent event;
     sprite_t player;
 }game_t;
-void game_init(game_t *g, char *filename);
+void game_init(game_t *g);
 void game_loop(game_t *g);
 void game_free(game_t *g);
 #endif

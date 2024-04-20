@@ -31,7 +31,7 @@
 #include "game.h"
 #include "draw.h"
 
-void game_init(game_t *g, char *filename)
+void game_init(game_t *g)
 {
     g->mode.width = WIDTH;
     g->mode.height = HEIGHT;
@@ -48,12 +48,19 @@ static void poll_events(game_t *g)
     while (sfRenderWindow_pollEvent(g->window, &g->event)) {
         if (g->event.type == sfEvtClosed)
             sfRenderWindow_close(g->window);
+        if (g->event.type == sfEvtMouseButtonPressed) {
+            menu_event(&g->menu, &g->event);
+        }
+        if (g->event.type == sfEvtMouseMoved) {
+            menu_event(&g->menu, &g->event);
+        }
     }
 }
 
 static void update(game_t *g)
 {
     sprite_animation(&g->player);
+    update_menu(&g->menu);
 }
 
 static void render(game_t *g)

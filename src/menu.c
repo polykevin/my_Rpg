@@ -4,15 +4,15 @@
 ** File description:
 ** menu
 */
+#include <SFML/Config.h>
 #include <SFML/Graphics.h>
 #include <SFML/Graphics/CircleShape.h>
 #include <SFML/Graphics/RectangleShape.h>
 #include <SFML/Graphics/RenderWindow.h>
+#include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Texture.h>
 #include <stdlib.h>
 #include "menu.h"
-#include "my.h"
-#include "game.h"
 
 static void init_texture_filename(menu_t *menu)
 {
@@ -31,6 +31,35 @@ void create_buttons_menu(menu_t *menu)
         sfSprite_setScale(menu->buttons[i]->sprite, (sfVector2f){0.5, 0.5});
         sfSprite_setPosition(menu->buttons[i]->sprite, (sfVector2f){x, y});
         y += 200;
+    }
+}
+
+void update_menu(menu_t *menu)
+{
+    for (int i = 0; i < 3; i++) {
+        switch (menu->buttons[i]->state) {
+            case HOVER:
+                sfSprite_setColor(menu->buttons[i]->sprite,
+                    (sfColor){150, 150, 150, 255});
+                break;
+            default:
+                sfSprite_setColor(menu->buttons[i]->sprite,
+                    (sfColor){255, 255, 255, 255});
+        }
+    }
+}
+
+void menu_event(menu_t *menu, sfEvent *event)
+{
+    for (int i = 0; i < 3; i++) {
+        if (menu->buttons[i]->is_clicked(menu->buttons[i],
+            &event->mouseButton)) {
+            continue;
+        }
+        if (menu->buttons[i]->is_hover(menu->buttons[i],
+            &event->mouseMove)) {
+            continue;
+        }
     }
 }
 

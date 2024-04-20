@@ -13,5 +13,6 @@ typedef struct sprite {
 }sprite_t;
 void sprite_init(sprite_t *s, char *texture);
 void sprite_draw(sprite_t *s, sfRenderWindow *window);
+void sprite_animation(sprite_t *s);
 void sprite_free(sprite_t *s);
 #endif

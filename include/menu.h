@@ -17,5 +17,7 @@ typedef struct menu {
 } menu_t;
 
 void create_menu(menu_t *menu);
+void menu_event(menu_t *menu, sfEvent *event);
+void update_menu(menu_t *menu);
 
 #endif // !MENU_H
