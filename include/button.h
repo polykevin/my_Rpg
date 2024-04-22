@@ -19,6 +19,7 @@ typedef enum {
     CLICKED,
     NORMAL
 }state_t;
+
 typedef struct button_menu {
     sfSprite *sprite;
     sfTexture *texture;
@@ -28,5 +29,6 @@ typedef struct button_menu {
 }button_menu_t;
 
 button_menu_t *create_button(char *texture_filename);
+void destroy_button(button_menu_t *button);
 
 #endif // !BUTTON_H

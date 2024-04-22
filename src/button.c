@@ -5,8 +5,10 @@
 ** button
 */
 #include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Texture.h>
 #include <stdlib.h>
 #include "button.h"
+#include "sprite.h"
 #include "game.h"
 #include "menu.h"
 
@@ -55,4 +57,11 @@ button_menu_t *create_button(char *texture_filename)
     sfSprite_setTexture(button->sprite, button->texture, sfTrue);
     sfSprite_setScale(button->sprite, (sfVector2f){1, 1});
     return button;
+}
+
+void destroy_button(button_menu_t *button)
+{
+    sfTexture_destroy(button->texture);
+    sfSprite_destroy(button->sprite);
+    free(button);
 }
