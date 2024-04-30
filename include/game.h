@@ -23,7 +23,8 @@ typedef struct text {
 
 typedef enum {
     MENU,
-    MAP
+    MAP,
+    FIGHT
 }game_state_t;
 
 typedef struct game {

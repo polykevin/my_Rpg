@@ -107,6 +107,8 @@ static void render(game_t *g)
         sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
         sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
     }
+    if (g->state == FIGHT) {
+    }
     sfRenderWindow_display(g->window);
 }
 
