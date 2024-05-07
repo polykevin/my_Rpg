@@ -40,7 +40,10 @@ typedef struct game {
     sfTime last_time;
     double delta_time;
 }game_t;
+
+int my_rpg(int argc, char **argv);
 void game_init(game_t *g);
 void game_loop(game_t *g);
 void game_free(game_t *g);
+void snow_map(game_t *game);
 #endif

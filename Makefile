@@ -5,11 +5,20 @@
 ## No file there , just an epitech header example .
 ## You can even have multiple lines if you want !
 ##
-SRC    =	src/main.c	\
-			src/game.c  \
-			src/button.c \
-			src/sprite.c	\
-			src/menu.c	\
+SRC    =	main.c	\
+			my_rpg.c	\
+			menu/game.c  \
+			menu/button.c \
+			menu/sprite.c	\
+			menu/menu.c	\
+			snow_map/snow_map.c	\
+			snow_map/action_key.c	\
+			snow_map/map_movement.c	\
+			snow_map/tools/check_contact.c	\
+			snow_map/tools/time.c	\
+			snow_map/destroy/display.c	\
+			snow_map/destroy/destroy_snow.c	\
+			snow_map/initialize/inizialize_snow_map.c	\
 
 
 OBJ =   	$(SRC:.c=.o)

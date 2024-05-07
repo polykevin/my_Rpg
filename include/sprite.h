@@ -4,6 +4,7 @@
 ** File description:
 ** sprite
 */
+
 #ifndef SPRITE_H
     #define SPRITE_H
 
@@ -14,7 +15,7 @@ typedef struct sprite {
     double accumulator;
 }sprite_t;
 
- typedef struct game game_t;
+typedef struct game game_t;
 
 void sprite_init(sprite_t *s, char *texture, sfIntRect rect);
 void sprite_draw(sprite_t *s, sfRenderWindow *window);
