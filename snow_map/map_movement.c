@@ -11,7 +11,7 @@
 #include <SFML/Window.h>
 #include <SFML/Audio.h>
 
-static void wait_x_sec(float sec)
+void wait_x_sec(float sec)
 {
     sfClock *clock;
     float seconds = 0;
@@ -59,73 +59,73 @@ static void move_map(level_t *level, game_t *game, int code)
 static void map_up(level_t *level, game_t *game)
 {
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
-    sfVector2f scale = sfSprite_getScale(PLAYER.sprite);
 
-    // while (sfKeyboard_isKeyPressed(sfKeyW)) {
+    while (sfKeyboard_isKeyPressed(sfKeyW)) {
         pos = sfSprite_getPosition(PLAYER.sprite);
-        scale = sfSprite_getScale(PLAYER.sprite);
         pos.y = pos.y - 4;
-        if (check_contact(pos, scale, REC[0].rec) == FAIL)
+        if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 1);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
-    // }
+    }
 }
 
 static void map_down(level_t *level, game_t *game)
 {
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
-    sfVector2f scale = sfSprite_getScale(PLAYER.sprite);
 
-    // while (sfKeyboard_isKeyPressed(sfKeyS)) {
+    while (sfKeyboard_isKeyPressed(sfKeyS)) {
         pos = sfSprite_getPosition(PLAYER.sprite);
-        scale = sfSprite_getScale(PLAYER.sprite);
         pos.y = pos.y + 4;
-        if (check_contact(pos, scale, REC[0].rec) == FAIL)
+        if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 2);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
-    // }
+    }
 }
 
 static void map_left(level_t *level, game_t *game)
 {
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
-    sfVector2f scale = sfSprite_getScale(PLAYER.sprite);
 
-    // while (sfKeyboard_isKeyPressed(sfKeyA)) {
+    while (sfKeyboard_isKeyPressed(sfKeyA)) {
         pos = sfSprite_getPosition(PLAYER.sprite);
-        scale = sfSprite_getScale(PLAYER.sprite);
         pos.x = pos.x - 4;
-        if (check_contact(pos, scale, REC[0].rec) == FAIL)
+        if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 3);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
-    // }
+    }
 }
 
 static void map_right(level_t *level, game_t *game)
 {
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
-    sfVector2f scale = sfSprite_getScale(PLAYER.sprite);
 
-    // while (sfKeyboard_isKeyPressed(sfKeyD) != sfFalse) {
+    while (sfKeyboard_isKeyPressed(sfKeyD) != sfFalse) {
         pos = sfSprite_getPosition(PLAYER.sprite);
-        scale = sfSprite_getScale(PLAYER.sprite);
         pos.x = pos.x + 4;
-        if (check_contact(pos, scale, REC[0].rec) == FAIL)
+        if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 4);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
-    // }
+    }
 }
 
 void map_movement(level_t *level, game_t *game, int direction)

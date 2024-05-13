@@ -14,11 +14,14 @@ SRC    =	main.c	\
 			snow_map/snow_map.c	\
 			snow_map/action_key.c	\
 			snow_map/map_movement.c	\
-			snow_map/tools/check_contact.c	\
+			snow_map/start_game_menu.c	\
+			snow_map/menu/handle_key.c	\
 			snow_map/tools/time.c	\
+			snow_map/tools/check_contact.c	\
 			snow_map/destroy/display.c	\
 			snow_map/destroy/destroy_snow.c	\
 			snow_map/initialize/inizialize_snow_map.c	\
+			snow_map/initialize/inizialize_game_menu.c	\
 
 
 OBJ =   	$(SRC:.c=.o)

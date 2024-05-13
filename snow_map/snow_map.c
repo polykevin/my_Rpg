@@ -8,25 +8,35 @@
 #include "snow_header.h"
 #include "game.h"
 
-static void run_snow_map(game_t *game, level_t *level)
+static void run_snow_map(game_t *game, level_t *level, G_menu_t *menu)
 {
+    int exit = 0;
+
     while (sfRenderWindow_isOpen(WINDOW)){
         // game_handle_time(game);
         // idle_animation(level, game, PLAYER_SPRITE_SIZE, 320);
         while (sfRenderWindow_pollEvent(WINDOW, &EVENT))
-            run_action(level, game);
+            exit = run_action(level, game, menu);
+        if (exit == FAIL)
+            return;
+        sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
+        display_game_menu(game, menu);
+        sfRenderWindow_display(WINDOW);
     }
 }
 
 void snow_map(game_t *game)
 {
     level_t level;
+    G_menu_t menu;
 
     sfView_setCenter(game->camera, (sfVector2f){MAP_WIDTH * 2,
             MAP_HEIGHT * 2});
     sfRenderWindow_setView(WINDOW, game->camera);
     inizialize_snow_level(&level);
-    run_snow_map(game, &level);
+    inizialize_game_menu(&menu);
+    run_snow_map(game, &level, &menu);
     destroy_snow(&level);
+    destroy_game_menu(&menu);
 }

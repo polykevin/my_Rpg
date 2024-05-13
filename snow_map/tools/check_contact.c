@@ -7,7 +7,7 @@
 
 #include "snow_header.h"
 
-int check_contact(sfVector2f pos_1, sfVector2f scale_1, sfRectangleShape *box_2)
+int check_contact(sfVector2f pos_1, sfRectangleShape *box_2)
 {
     sfVector2f pos_2 = sfRectangleShape_getPosition(box_2);
     sfVector2f scale_2 = sfRectangleShape_getSize(box_2);
@@ -17,7 +17,7 @@ int check_contact(sfVector2f pos_1, sfVector2f scale_1, sfRectangleShape *box_2)
     int y2_max = y2_min + scale_2.y;
     int x = 0;
     int y = 0;
-    
+
     if (x2_min <= pos_1.x && x2_max >= pos_1.x)
         x++;
     if (x2_min <= (pos_1.x + 60) && x2_max >= (pos_1.x + 60))
