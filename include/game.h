@@ -34,6 +34,7 @@ typedef struct game {
     sfEvent event;
     sprite_t player;
     sprite_t map;
+    sprite_t **tab_ennemy;
     game_state_t state;
     sfView *camera;
     sfClock *clock;
