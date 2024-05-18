@@ -49,8 +49,8 @@ sprite_t **ennemy_init(game_t *g)
 {
     char **pos = NULL;
     sprite_t *ennemy = NULL;
-    int x = 0;
-    int y = 0;
+    double x = 0;
+    double y = 0;
 
     g->tab_ennemy = malloc(sizeof(sprite_t *));
     for (int i = 0; i < 4; i++) {
@@ -59,8 +59,8 @@ sprite_t **ennemy_init(game_t *g)
             PLAYER_SPRITE_SIZE});
         sfSprite_setScale(ennemy->sprite, (sfVector2f){4, 4});
         pos = set_position(i);
-        x = atof(pos[1]);
-        y = atof(pos[2]);
+        x = atof(pos[0]);
+        y = atof(pos[1]);
         sfSprite_setPosition(ennemy->sprite, (sfVector2f){MAP_WIDTH * x,
             MAP_HEIGHT * y});
         g->tab_ennemy[i] = ennemy;
@@ -166,5 +166,8 @@ void game_free(game_t *g)
     sfRenderWindow_destroy(g->window);
     sprite_free(&g->map);
     sprite_free(&g->player);
+    for (int i = 0; i < 4; i++) {
+        sprite_free(g->tab_ennemy[i]);
+    }
     destroy_menu(&g->menu);
 }
