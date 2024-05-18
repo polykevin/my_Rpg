@@ -42,7 +42,7 @@ char *my_strstr(char *str, char const *to_find);
 char *my_strupcase(char *str);
 void my_swap(int *a, int *b);
 int my_show_word_array(char *const *tab);
-char **my_str_to_word_array(char const *str);
+char **my_str_to_word_array(char *s, char c);
 int my_printf(const char *format, ...);
 int my_put_nbr_uint(unsigned int nb);
 #endif /* MY_H_ */
