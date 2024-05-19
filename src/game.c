@@ -43,16 +43,17 @@ char **set_position(int i)
         return my_str_to_word_array("1.02,1.77", ',');
     if (i == 3)
         return my_str_to_word_array("1.87,1.32", ',');
+    return NULL;
 }
 
-sprite_t **ennemy_init(game_t *g)
+void ennemy_init(game_t *g)
 {
     char **pos = NULL;
     sprite_t *ennemy = NULL;
     double x = 0;
     double y = 0;
 
-    g->tab_ennemy = malloc(sizeof(sprite_t *));
+    g->tab_ennemy = malloc(sizeof(sprite_t *) * 4);
     for (int i = 0; i < 4; i++) {
         ennemy = malloc(sizeof(sprite_t));
         sprite_init(ennemy, "idle.png", (sfIntRect){0, 0, PLAYER_SPRITE_SIZE,
