@@ -7,6 +7,7 @@
 
 #include "snow_header.h"
 
+
 static void inventory_off(level_t *level, game_t *game, G_menu_t *menu)
 {
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyS))
@@ -24,8 +25,20 @@ static void inventory_off(level_t *level, game_t *game, G_menu_t *menu)
     }
 }
 
-static int inventory_on(G_menu_t *menu)
+static int inventory(G_menu_t *menu, level_t *level)
 {
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
+        menu->bag = OFF;
+        destroy_inventory(level->inventory);
+        wait_x_sec(0.3);
+    }
+    return 0;
+}
+
+static int inventory_on(G_menu_t *menu, level_t *level, game_t *game)
+{
+    if (menu->bag == ON)
+        return (inventory(menu, level));
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
         menu->on_off = OFF;
     }
@@ -34,7 +47,7 @@ static int inventory_on(G_menu_t *menu)
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyDown))
         go_down(menu);
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEnter))
-        return (menu_enter(menu));
+        return (menu_enter(menu, level, game));
     return (0);
 }
 
@@ -45,6 +58,6 @@ int run_action(level_t *level, game_t *game, G_menu_t *menu)
     if (menu->on_off == OFF)
         inventory_off(level, game, menu);
     else
-        return (inventory_on(menu));
+        return (inventory_on(menu, level, game));
     return (0);
 }

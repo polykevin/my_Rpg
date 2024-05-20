@@ -9,8 +9,12 @@
 
 static void malloc_struct(G_menu_t *menu)
 {
-    menu->back = malloc(sizeof(Background_t) * 3);
-    menu->words = malloc(sizeof(words_t) * 6);
+    menu->back = malloc(sizeof(Background_t) * 5);
+    menu->words = malloc(sizeof(words_t) * 7);
+}
+
+static void inizialize_text_2(G_menu_t *menu)
+{
 }
 
 static void inzialize_text_2(G_menu_t *menu)
@@ -23,6 +27,10 @@ static void inzialize_text_2(G_menu_t *menu)
     sfText_setString(TEXT[5].text, "Quit");
     sfText_setFont(TEXT[5].text, menu->font);
     sfText_setCharacterSize(TEXT[5].text, 30);
+    TEXT[6].text = sfText_create();
+    sfText_setString(TEXT[6].text, "Inventory");
+    sfText_setFont(TEXT[6].text, menu->font);
+    sfText_setCharacterSize(TEXT[6].text, 35);
 }
 
 static void inzialize_text(G_menu_t *menu)
@@ -45,6 +53,26 @@ static void inzialize_text(G_menu_t *menu)
     sfText_setFont(TEXT[3].text, menu->font);
     sfText_setCharacterSize(TEXT[3].text, 30);
     inzialize_text_2(menu);
+}
+
+static void inizialize_inventory(G_menu_t *menu)
+{
+    BACK[3].back = sfRectangleShape_create();
+    sfRectangleShape_setSize(BACK[3].back,
+    (sfVector2f){WIDTH * 0.4, HEIGHT * 0.4});
+    sfRectangleShape_setFillColor(BACK[3].back,
+    sfColor_fromRGBA(19, 27, 142, 255));
+    sfRectangleShape_setOutlineThickness(BACK[3].back, 5);
+    sfRectangleShape_setOutlineColor(BACK[3].back,
+    sfColor_fromRGBA(250, 250, 250, 250));
+    BACK[4].back = sfRectangleShape_create();
+    sfRectangleShape_setSize(BACK[4].back,
+    (sfVector2f){WIDTH * 0.1, HEIGHT * 0.06});
+    sfRectangleShape_setFillColor(BACK[4].back,
+    sfColor_fromRGBA(19, 27, 142, 255));
+    sfRectangleShape_setOutlineThickness(BACK[4].back, 5);
+    sfRectangleShape_setOutlineColor(BACK[4].back,
+    sfColor_fromRGBA(250, 250, 250, 250));
 }
 
 static void inizialize_background(G_menu_t *menu)
@@ -74,8 +102,10 @@ static void inizialize_background(G_menu_t *menu)
 void inizialize_game_menu(G_menu_t *menu)
 {
     menu->on_off = OFF;
+    menu->bag = OFF;
     menu->menu_nb = 0;
     malloc_struct(menu);
     inizialize_background(menu);
+    inizialize_inventory(menu);
     inzialize_text(menu);
 }

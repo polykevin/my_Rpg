@@ -31,6 +31,7 @@ typedef struct G_menu_s {
     sfFont* font;
     int menu_nb;
     int on_off;
+    int bag;
 } G_menu_t;
 
 #endif /* G_MENU_H_ */
