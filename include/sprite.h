@@ -7,11 +7,14 @@
 
 #ifndef SPRITE_H
     #define SPRITE_H
+    #include <stdbool.h>
 
 typedef struct sprite {
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect texture_rect;
+    bool draw;
+    double animation_speed;
     double accumulator;
 }sprite_t;
 

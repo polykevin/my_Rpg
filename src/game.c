@@ -28,6 +28,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "button.h"
+#include "interact.h"
 #include "menu.h"
 #include "player_movement.h"
 #include "sprite.h"
@@ -57,8 +58,9 @@ void ennemy_init(game_t *g)
     g->tab_ennemy = malloc(sizeof(sprite_t *) * 4);
     for (int i = 0; i < 4; i++) {
         ennemy = malloc(sizeof(sprite_t));
-        sprite_init(ennemy, "idle.png", (sfIntRect){0, 0, PLAYER_SPRITE_SIZE,
-            PLAYER_SPRITE_SIZE});
+        sprite_init(ennemy, "resource/player/idle.png",
+            (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
+        sfSprite_setScale(g->interact.sprite, (sfVector2f){0.15, 0.15});
         sfSprite_setScale(ennemy->sprite, (sfVector2f){4, 4});
         pos = set_position(i);
         x = atof(pos[0]);
@@ -69,7 +71,7 @@ void ennemy_init(game_t *g)
     }
 }
 
-static void init_player_sprite(game_t *g)
+static void init_sprite(game_t *g)
 {
     sprite_init(&g->player, "resource/player/idle.png",
         (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
@@ -77,6 +79,16 @@ static void init_player_sprite(game_t *g)
     g->player_textures[1] =
         sfTexture_createFromFile("resource/player/walk.png", NULL);
     g->player_state = IDLE;
+    g->player.animation_speed = 0.28;
+    sprite_init(&g->map, "resource/map/map.png",
+        (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
+    sprite_init(&g->interact, "resource/interact.png",
+        (sfIntRect){0, 0, INTERACT_WIDTH, INTERACT_HEIGHT});
+    sfSprite_setScale(g->map.sprite, (sfVector2f){4, 4});
+    g->interact.animation_speed = 0.10;
+    sfSprite_setScale(g->player.sprite, (sfVector2f){4, 4});
+    sfSprite_setPosition(g->player.sprite, (sfVector2f){MAP_WIDTH * 1.87,
+    MAP_HEIGHT * 1.75});
 }
 
 void game_init(game_t *g)
@@ -88,13 +100,7 @@ void game_init(game_t *g)
     sfResize | sfClose, NULL);
     g->state = MENU;
     sfRenderWindow_setFramerateLimit(g->window, 60);
-    init_player_sprite(g);
-    sprite_init(&g->map, "resource/map/map.png",
-        (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
-    sfSprite_setScale(g->map.sprite, (sfVector2f){4, 4});
-    sfSprite_setScale(g->player.sprite, (sfVector2f){4, 4});
-    sfSprite_setPosition(g->player.sprite, (sfVector2f){MAP_WIDTH * 1.87,
-    MAP_HEIGHT * 1.75});
+    init_sprite(g);
     ennemy_init(g);
     create_menu(&g->menu);
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});
@@ -140,6 +146,9 @@ static void update(game_t *g)
         if (!player_movement(g)) {
             sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
         }
+        if (is_interact(g)) {
+            sprite_animation(&g->interact, g, 1023, 7777);
+        }
         sfRenderWindow_setView(g->window, g->camera);
     }
 }
@@ -155,11 +164,13 @@ static void render(game_t *g)
     }
     if (g->state == MAP) {
         sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
         for (int i = 0; i < 4; i++) {
             sfRenderWindow_drawSprite(g->window,
                 g->tab_ennemy[i]->sprite, NULL);
         }
+        sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
+        if (g->interact.draw)
+            sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
     if (g->state == FIGHT) {
     }

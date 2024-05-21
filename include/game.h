@@ -11,6 +11,8 @@
     #define PLAYER_SPRITE_SIZE 80
     #define MAP_WIDTH 1154
     #define MAP_HEIGHT 1052
+    #define INTERACT_WIDTH 625
+    #define INTERACT_HEIGHT 320
     #include <SFML/Graphics.h>
     #include "menu.h"
     #include "list.h"
@@ -45,6 +47,7 @@ typedef struct game {
     sfTexture *player_textures[2];
     sprite_t map;
     sprite_t **tab_ennemy;
+    sprite_t interact;
     game_state_t state;
     sfView *camera;
     sfClock *clock;

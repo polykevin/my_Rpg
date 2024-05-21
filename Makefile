@@ -16,6 +16,7 @@ SRC    =	src/main.c					\
 			src/display.c	            \
 			src/player_movement.c       \
 			src/utils.c 				\
+			src/interact.c 				\
 
 
 OBJ =   	$(SRC:.c=.o)

@@ -18,6 +18,8 @@ void sprite_init(sprite_t *s, char *texture, sfIntRect rect)
     s->texture = sfTexture_createFromFile(texture, NULL);
     s->sprite = sfSprite_create();
     s->texture_rect = rect;
+    s->draw = true;
+    s->animation_speed = 0.1;
     sfSprite_setTexture(s->sprite, s->texture, sfTrue);
     sfSprite_setTextureRect(s->sprite, s->texture_rect);
 }
@@ -32,7 +34,7 @@ void sprite_animation(sprite_t *s, game_t *g, int offset, int max)
     if (s->texture_rect.left >= max) {
         s->texture_rect.left = 0;
     }
-    if (s->accumulator >= 0.28) {
+    if (s->accumulator >= s->animation_speed) {
         s->texture_rect.left += offset;
         if (s->texture_rect.left < max) {
             sfSprite_setTextureRect(s->sprite, s->texture_rect);
