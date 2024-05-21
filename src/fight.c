@@ -19,7 +19,8 @@ void create_fight(fight_t *fight)
         (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
     sprite_init(&fight->opponent, "resource/player/Skeleton.png",
         (sfIntRect){0, 35, 25, 30});
-    fight->player.animation_speed = 0.48;
+    fight->player.animation_speed = 0.18;
+    fight->opponent.animation_speed = 0.18;
     set_size(fight);
 }
 

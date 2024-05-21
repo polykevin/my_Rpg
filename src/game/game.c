@@ -36,7 +36,7 @@
 #include "fight.h"
 #include "my.h"
 
-char **set_position(int i)
+static char **set_position(int i)
 {
     if (i == 0)
         return my_str_to_word_array("1.87,2.30", ',');
@@ -49,7 +49,7 @@ char **set_position(int i)
     return NULL;
 }
 
-void ennemy_init(game_t *g)
+static void ennemy_init(game_t *g)
 {
     char **pos = NULL;
     sprite_t *ennemy = NULL;
@@ -134,60 +134,18 @@ void game_handle_time(game_t *g)
 
 static void update(game_t *g)
 {
-    bool finished = false;
-
     game_handle_time(g);
-    if (g->state == MENU)
-        update_menu(&g->menu);
-    if (sfMouse_isButtonPressed(sfMouseLeft) &&
-        g->menu.buttons[0]->state == CLICKED && g->state == MENU) {
-        g->state = MAP;
-        sfView_setCenter(g->camera, (sfVector2f){MAP_WIDTH * 2,
-            MAP_HEIGHT * 2});
-        sfRenderWindow_setView(g->window, g->camera);
-    }
-    if (g->state == MAP) {
-        if (!player_movement(g)) {
-            sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
-        }
-        if (is_interact(g, &finished)) {
-            sprite_animation(&g->interact, g, 1023, 7777);
-        }
-        if (!finished)
-            sfRenderWindow_setView(g->window, g->camera);
-    }
-    if (g->state == FIGHT) {
-        sprite_animation(g->fight.player.sprite, g, 30, 320);
-      //  sprite_animation(g->fight.opponent.sprite, g, 25, 384);
-    }
+    game_update_menu(g);
+    game_update_map(g);
+    game_update_fight(g);
 }
 
 static void render(game_t *g)
 {
     sfRenderWindow_clear(g->window, sfWhite);
-    if (g->state == MENU) {
-        sfRenderWindow_drawSprite(g->window, g->menu.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->menu.buttons[0]->sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->menu.buttons[1]->sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->menu.buttons[2]->sprite, NULL);
-    }
-    if (g->state == MAP) {
-        sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
-        for (int i = 0; i < 4; i++) {
-            sfRenderWindow_drawSprite(g->window,
-                g->tab_ennemy[i]->sprite, NULL);
-        }
-        sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
-        if (g->interact.draw)
-            sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
-    }
-    if (g->state == FIGHT) {
-            sfRenderWindow_drawSprite(g->window, g->fight.scene.sprite, NULL);
-           sfRenderWindow_drawSprite(g->window, g->fight.platform1.sprite, NULL);
-           sfRenderWindow_drawSprite(g->window, g->fight.platform2.sprite, NULL);
-           sfRenderWindow_drawSprite(g->window, g->fight.opponent.sprite, NULL);
-             sfRenderWindow_drawSprite(g->window, g->fight.player.sprite, NULL);
-    }
+    game_render_menu(g);
+    game_render_map(g);
+    game_render_fight(g);
     sfRenderWindow_display(g->window);
 }
 

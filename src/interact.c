@@ -50,6 +50,27 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
     return false;
 }
 
+static void start_fight_animation(double *angle, double *zoom_factor,
+    game_t *g)
+{
+    if (*angle != 0.0) {
+        *zoom_factor += 0.005;
+        *angle += 15.0 * g->delta_time;
+        sfView_rotate(g->camera, *angle);
+        sfView_zoom(g->camera, *zoom_factor);
+    }
+}
+
+static void end_fight_animation(double angle, bool *finished, game_t *g)
+{
+    if (angle > 10.0) {
+        g->state = FIGHT;
+        sfRenderWindow_setView(g->window,
+            sfRenderWindow_getDefaultView(g->window));
+        *finished = true;
+    }
+}
+
 bool is_interact(game_t *g, bool *finished)
 {
     sfFloatRect player = sfSprite_getGlobalBounds(g->player.sprite);
@@ -60,18 +81,8 @@ bool is_interact(game_t *g, bool *finished)
     player.top += PLAYER_SPRITE_SIZE;
     player.width = PLAYER_SPRITE_SIZE;
     player.height = PLAYER_SPRITE_SIZE;
-    if (angle > 10.0) {
-        g->state = FIGHT;
-        sfRenderWindow_setView(g->window,
-            sfRenderWindow_getDefaultView(g->window));
-        *finished = true;
-    }
-    if (angle != 0.0) {
-        zoom_factor += 0.005;
-        angle += 15.0 * g->delta_time;
-        sfView_rotate(g->camera, angle);
-        sfView_zoom(g->camera, zoom_factor);
-    }
+    end_fight_animation(angle, finished, g);
+    start_fight_animation(&angle, &zoom_factor, g);
     if (check_enemies(g, &player, &zoom_factor, &angle))
         return true;
     g->interact.draw = false;

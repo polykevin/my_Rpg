@@ -62,4 +62,10 @@ void game_init(game_t *g);
 int game_loop(game_t *g);
 void game_free(game_t *g);
 void snow_map(game_t *game);
+void game_update_fight(game_t *g);
+void game_update_map(game_t *g);
+void game_update_menu(game_t *g);
+void game_render_menu(game_t *g);
+void game_render_map(game_t *g);
+void game_render_fight(game_t *g);
 #endif

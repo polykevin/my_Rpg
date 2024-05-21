@@ -18,10 +18,6 @@ static void inventory_off(level_t *level, game_t *g, G_menu_t *menu)
         map_movement(level, g, 3);
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyD))
         map_movement(level, g, 4);
-    // if (!player_movement(g)) {
-    //         sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
-    //     }
-    //     sfRenderWindow_setView(g->window, g->camera);
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyB)) {
         wait_x_sec(0.1);
         menu->on_off = ON;
