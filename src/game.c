@@ -122,7 +122,7 @@ static void poll_events(game_t *g)
     }
 }
 
-static void game_handle_time(game_t *g)
+void game_handle_time(game_t *g)
 {
     g->last_time = g->time;
     g->time = sfClock_getElapsedTime(g->clock);
@@ -130,30 +130,24 @@ static void game_handle_time(game_t *g)
     - (g->last_time.microseconds / 1000000.0);
 }
 
-static void update(game_t *g)
+static int update(game_t *g)
 {
-    bool finished = false;
-
     game_handle_time(g);
     if (g->state == MENU)
         update_menu(&g->menu);
     if (sfMouse_isButtonPressed(sfMouseLeft) &&
         g->menu.buttons[0]->state == CLICKED && g->state == MENU) {
-        g->state = MAP;
-        sfView_setCenter(g->camera, (sfVector2f){MAP_WIDTH * 2,
-            MAP_HEIGHT * 2});
-        sfRenderWindow_setView(g->window, g->camera);
+        return 1;
     }
     if (g->state == MAP) {
         if (!player_movement(g)) {
             sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
         }
-        if (is_interact(g, &finished)) {
-            sprite_animation(&g->interact, g, 1023, 7777);
+        // if (is_interact(g)) {
+        //     sprite_animation(&g->interact, g, 1023, 7777);
         }
-        if (!finished)
-            sfRenderWindow_setView(g->window, g->camera);
-    }
+        sfRenderWindow_setView(g->window, g->camera);
+    return 0;
 }
 
 static void render(game_t *g)
@@ -172,22 +166,24 @@ static void render(game_t *g)
                 g->tab_ennemy[i]->sprite, NULL);
         }
         sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
-        if (g->interact.draw)
-            sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
+        // if (g->interact.draw)
+        //     sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
     if (g->state == FIGHT) {
-        sfRenderWindow_drawSprite(g->window, g->menu.sprite, NULL);
     }
     sfRenderWindow_display(g->window);
 }
 
-void game_loop(game_t *g)
+int game_loop(game_t *g)
 {
-    while (sfRenderWindow_isOpen(g->window)) {
+    int x = 0;
+
+    while (sfRenderWindow_isOpen(g->window) && x != 1) {
         poll_events(g);
-        update(g);
+        x = update(g);
         render(g);
     }
+    snow_map(g);
 }
 
 void game_free(game_t *g)

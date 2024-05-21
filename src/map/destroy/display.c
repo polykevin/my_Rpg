@@ -37,5 +37,6 @@ void display_action(game_t *game, level_t *level)
     sfRenderWindow_setView(WINDOW, game->camera);
     sfRenderWindow_drawSprite(WINDOW, S_MAP.sprite, NULL);
     sfRenderWindow_drawSprite(WINDOW, PLAYER.sprite, NULL);
+    // sfRenderWindow_drawSprite(game->window, game->player.sprite, NULL);
     sfRenderWindow_drawRectangleShape(WINDOW, REC[0].rec, NULL);
 }

@@ -9,14 +9,21 @@ SRC    =	src/main.c					\
 			src/button.c 				\
 			src/sprite.c				\
 			src/menu.c					\
-			src/map_movement.c	        \
-			src/start_game_menu.c	    \
-			src/time.c	                \
-			src/check_contact.c	        \
-			src/display.c	            \
-			src/player_movement.c       \
+			src/map/action_key.c	\
+			src/map/map_movement.c	\
+			src/map/player_movement.c	\
+			src/map/snow_map.c	\
+			src/map/tools/time.c	\
+			src/map/tools/check_contact.c	\
+			src/map/destroy/display.c	\
+			src/map/destroy/destroy_snow.c	\
+			src/map/inizialize/inizialize_snow_map.c	\
+			src/map/inizialize/default_game.c	\
+			src/inventory/inizialize/inizialize_game_menu.c	\
+			src/inventory/handle_key.c	\
+			src/inventory/print_inventory.c	\
+			src/inventory/start_game_menu.c	\
 			src/utils.c 				\
-			src/interact.c 				\
 
 
 OBJ =   	$(SRC:.c=.o)
@@ -54,3 +61,4 @@ fclean: clean
 	$(MAKE) -C lib/my/ fclean
 
 re: fclean all
+
