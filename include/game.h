@@ -59,7 +59,7 @@ typedef struct game {
 }game_t;
 
 void game_init(game_t *g);
-void game_loop(game_t *g);
+int game_loop(game_t *g);
 void game_free(game_t *g);
 void snow_map(game_t *game);
 #endif

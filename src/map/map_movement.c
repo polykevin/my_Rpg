@@ -61,12 +61,15 @@ static void map_up(level_t *level, game_t *game)
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
 
     while (sfKeyboard_isKeyPressed(sfKeyW)) {
+        sfRenderWindow_clear(WINDOW, sfBlack);
         pos = sfSprite_getPosition(PLAYER.sprite);
         pos.y = pos.y - 4;
         if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 1);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -76,12 +79,15 @@ static void map_down(level_t *level, game_t *game)
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
 
     while (sfKeyboard_isKeyPressed(sfKeyS)) {
+        sfRenderWindow_clear(WINDOW, sfBlack);
         pos = sfSprite_getPosition(PLAYER.sprite);
         pos.y = pos.y + 4;
         if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 2);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -91,12 +97,15 @@ static void map_left(level_t *level, game_t *game)
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
 
     while (sfKeyboard_isKeyPressed(sfKeyA)) {
+        sfRenderWindow_clear(WINDOW, sfBlack);
         pos = sfSprite_getPosition(PLAYER.sprite);
         pos.x = pos.x - 4;
         if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 3);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -106,12 +115,15 @@ static void map_right(level_t *level, game_t *game)
     sfVector2f pos = sfSprite_getPosition(PLAYER.sprite);
 
     while (sfKeyboard_isKeyPressed(sfKeyD) != sfFalse) {
+        sfRenderWindow_clear(WINDOW, sfBlack);
         pos = sfSprite_getPosition(PLAYER.sprite);
         pos.x = pos.x + 4;
         if (check_contact(pos, REC[0].rec) == FAIL)
             move_map(level, game, 4);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
+        display_action(game, level);
+        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }

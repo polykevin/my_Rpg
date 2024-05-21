@@ -124,7 +124,7 @@ static void poll_events(game_t *g)
     }
 }
 
-static void game_handle_time(game_t *g)
+void game_handle_time(game_t *g)
 {
     g->last_time = g->time;
     g->time = sfClock_getElapsedTime(g->clock);
@@ -191,7 +191,7 @@ static void render(game_t *g)
     sfRenderWindow_display(g->window);
 }
 
-void game_loop(game_t *g)
+int game_loop(game_t *g)
 {
     while (sfRenderWindow_isOpen(g->window)) {
         poll_events(g);

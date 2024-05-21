@@ -41,9 +41,9 @@ static void inizialize_rec(level_t *level)
 
 void inizialize_snow_level(level_t *level)
 {
-    inizialize_player(level, "resource/player/idle.png",
+    inizialize_player(level, "resource/player/idlea.png",
     (sfIntRect){0, 0, 1154, 1052});
-    inizialize_map(level, "resource/snow_map/map.png",
+    inizialize_map(level, "resource/map/map.png",
     (sfIntRect){0, 0, 1154, 1052});
     inizialize_rec(level);
 }

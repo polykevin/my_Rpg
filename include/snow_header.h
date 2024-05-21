@@ -13,7 +13,7 @@
     #define S_MAP level->map
     #define REC level->rec
     #define BACK menu->back
-    #define INV level->inventory
+    #define INV inventory
     #define TEXT menu->words
     #define SUCCESS 0
     #define ON 0
@@ -33,10 +33,11 @@
     #include "game_menu.h"
     #include <stdio.h>
     #include <stdlib.h>
-
+    #include <stdbool.h>
 
 // void snow_map(game_t *game);
 int menu_enter(G_menu_t *menu, level_t *level, game_t *game);
+void game_handle_time(game_t *g);
 int run_action(level_t *level, game_t *game, G_menu_t *menu);
 void wait_x_sec(float sec);
 void inizialize_snow_level(level_t *level);
@@ -55,5 +56,6 @@ void go_up(G_menu_t *menu);
 void default_game(level_t *level, G_menu_t *menu);
 void print_inventory(G_menu_t *menu, level_t *level, game_t *game);
 void destroy_inventory(Inventory_t *inventory);
+bool player_movement(game_t *g);
 
 #endif /* LS_HEADER_H_ */

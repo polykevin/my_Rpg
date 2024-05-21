@@ -7,7 +7,7 @@
 
 #include "snow_level.h"
 
-static void game_handle_time(game_t *g)
+void game_handle_time(game_t *g)
 {
     g->last_time = g->time;
     g->time = sfClock_getElapsedTime(g->clock);
