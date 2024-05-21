@@ -10,5 +10,5 @@
     #include <stdbool.h>
     #include "game.h"
 
-bool is_interact(game_t *g);
+bool is_interact(game_t *g, bool *finished);
 #endif

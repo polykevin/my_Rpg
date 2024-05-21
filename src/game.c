@@ -132,6 +132,8 @@ static void game_handle_time(game_t *g)
 
 static void update(game_t *g)
 {
+    bool finished = false;
+
     game_handle_time(g);
     if (g->state == MENU)
         update_menu(&g->menu);
@@ -146,10 +148,11 @@ static void update(game_t *g)
         if (!player_movement(g)) {
             sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
         }
-        if (is_interact(g)) {
+        if (is_interact(g, &finished)) {
             sprite_animation(&g->interact, g, 1023, 7777);
         }
-        sfRenderWindow_setView(g->window, g->camera);
+        if (!finished)
+            sfRenderWindow_setView(g->window, g->camera);
     }
 }
 
@@ -173,6 +176,7 @@ static void render(game_t *g)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
     if (g->state == FIGHT) {
+        sfRenderWindow_drawSprite(g->window, g->menu.sprite, NULL);
     }
     sfRenderWindow_display(g->window);
 }

@@ -5,6 +5,7 @@
 ** interact with enemies
 */
 #include <SFML/Graphics/Rect.h>
+#include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/View.h>
 #include <SFML/System/Vector2.h>
@@ -49,7 +50,7 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
     return false;
 }
 
-bool is_interact(game_t *g)
+bool is_interact(game_t *g, bool *finished)
 {
     sfFloatRect player = sfSprite_getGlobalBounds(g->player.sprite);
     static double angle = 0.0;
@@ -59,8 +60,11 @@ bool is_interact(game_t *g)
     player.top += PLAYER_SPRITE_SIZE;
     player.width = PLAYER_SPRITE_SIZE;
     player.height = PLAYER_SPRITE_SIZE;
-    if (angle > 30.0)
+    if (angle > 30.0) {
         g->state = FIGHT;
+        sfRenderWindow_setView(g->window, sfRenderWindow_getDefaultView(g->window));
+        *finished = true;
+    }
     if (angle != 0.0) {
         zoom_factor += 0.005;
         angle += 15.0 * g->delta_time;
