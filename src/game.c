@@ -29,9 +29,19 @@
 #include <stdlib.h>
 #include "button.h"
 #include "menu.h"
+#include "player_movement.h"
 #include "sprite.h"
 #include "game.h"
-#include "snow_header.h"
+
+static void init_player_sprite(game_t *g)
+{
+    sprite_init(&g->player, "resource/player/idle.png",
+        (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
+    g->player_textures[0] = g->player.texture;
+    g->player_textures[1] =
+        sfTexture_createFromFile("resource/player/walk.png", NULL);
+    g->player_state = IDLE;
+}
 
 void game_init(game_t *g)
 {
@@ -42,6 +52,13 @@ void game_init(game_t *g)
     sfResize | sfClose, NULL);
     g->state = MENU;
     sfRenderWindow_setFramerateLimit(g->window, 60);
+    init_player_sprite(g);
+    sprite_init(&g->map, "resource/map/map.png",
+        (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
+    sfSprite_setScale(g->map.sprite, (sfVector2f){4, 4});
+    sfSprite_setScale(g->player.sprite, (sfVector2f){4, 4});
+    sfSprite_setPosition(g->player.sprite, (sfVector2f){MAP_WIDTH * 1.87,
+    MAP_HEIGHT * 1.75});
     create_menu(&g->menu);
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});
     g->clock = sfClock_create();
@@ -77,10 +94,15 @@ static void update(game_t *g)
         update_menu(&g->menu);
     if (sfMouse_isButtonPressed(sfMouseLeft) &&
         g->menu.buttons[0]->state == CLICKED && g->state == MENU) {
-        snow_map(g);
+        g->state = MAP;
+        sfView_setCenter(g->camera, (sfVector2f){MAP_WIDTH * 2,
+            MAP_HEIGHT * 2});
+        sfRenderWindow_setView(g->window, g->camera);
     }
     if (g->state == MAP) {
-        sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+        if (!player_movement(g)) {
+            sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+        }
         sfRenderWindow_setView(g->window, g->camera);
     }
 }
@@ -113,5 +135,7 @@ void game_loop(game_t *g)
 void game_free(game_t *g)
 {
     sfRenderWindow_destroy(g->window);
+    sprite_free(&g->map);
+    sprite_free(&g->player);
     destroy_menu(&g->menu);
 }

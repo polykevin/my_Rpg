@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** my_pong_header
+** RPG
 ** File description:
 ** the main header
 */

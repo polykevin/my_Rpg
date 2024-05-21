@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** sprite
+** RPG
 ** File description:
 ** sprite
 */

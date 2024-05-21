@@ -13,8 +13,6 @@ static void run_snow_map(game_t *game, level_t *level, G_menu_t *menu)
     int exit = 0;
 
     while (sfRenderWindow_isOpen(WINDOW)){
-        // game_handle_time(game);
-        // idle_animation(level, game, PLAYER_SPRITE_SIZE, 320);
         while (sfRenderWindow_pollEvent(WINDOW, &EVENT))
             exit = run_action(level, game, menu);
         if (exit == FAIL)

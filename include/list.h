@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** list
+** RPG
 ** File description:
 ** list
 */

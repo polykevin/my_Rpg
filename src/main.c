@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2024
-** main
+** RPG
 ** File description:
 ** main
 */
 #include "game.h"
 
-int my_rpg(int argc, char **argv)
+int main(int argc, char **argv)
 {
     game_t my_rpg = {0};
 

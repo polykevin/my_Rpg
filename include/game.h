@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** game
+** RPG
 ** File description:
 ** game
 */
@@ -26,12 +26,22 @@ typedef enum {
     MAP
 }game_state_t;
 
+typedef enum {
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT,
+    IDLE
+}player_state_t;
+
 typedef struct game {
     sfVideoMode mode;
     sfRenderWindow *window;
     menu_t menu;
     sfEvent event;
     sprite_t player;
+    player_state_t player_state;
+    sfTexture *player_textures[2];
     sprite_t map;
     game_state_t state;
     sfView *camera;
@@ -41,7 +51,6 @@ typedef struct game {
     double delta_time;
 }game_t;
 
-int my_rpg(int argc, char **argv);
 void game_init(game_t *g);
 void game_loop(game_t *g);
 void game_free(game_t *g);

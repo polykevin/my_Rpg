@@ -67,9 +67,6 @@ static void map_up(level_t *level, game_t *game)
             move_map(level, game, 1);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
-        sfRenderWindow_clear(WINDOW, sfBlack);
-        display_action(game, level);
-        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -85,9 +82,6 @@ static void map_down(level_t *level, game_t *game)
             move_map(level, game, 2);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
-        sfRenderWindow_clear(WINDOW, sfBlack);
-        display_action(game, level);
-        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -103,9 +97,6 @@ static void map_left(level_t *level, game_t *game)
             move_map(level, game, 3);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
-        sfRenderWindow_clear(WINDOW, sfBlack);
-        display_action(game, level);
-        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }
@@ -121,9 +112,6 @@ static void map_right(level_t *level, game_t *game)
             move_map(level, game, 4);
         else
             sfSprite_setPosition(PLAYER.sprite, pos);
-        sfRenderWindow_clear(WINDOW, sfBlack);
-        display_action(game, level);
-        sfRenderWindow_display(WINDOW);
         wait_x_sec(0.01);
     }
 }

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** MiniShell_header
+** RPG
 ** File description:
 ** the main header
 */
