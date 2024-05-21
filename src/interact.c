@@ -60,9 +60,10 @@ bool is_interact(game_t *g, bool *finished)
     player.top += PLAYER_SPRITE_SIZE;
     player.width = PLAYER_SPRITE_SIZE;
     player.height = PLAYER_SPRITE_SIZE;
-    if (angle > 30.0) {
+    if (angle > 10.0) {
         g->state = FIGHT;
-        sfRenderWindow_setView(g->window, sfRenderWindow_getDefaultView(g->window));
+        sfRenderWindow_setView(g->window,
+            sfRenderWindow_getDefaultView(g->window));
         *finished = true;
     }
     if (angle != 0.0) {

@@ -33,6 +33,7 @@
 #include "player_movement.h"
 #include "sprite.h"
 #include "game.h"
+#include "fight.h"
 #include "my.h"
 
 char **set_position(int i)
@@ -102,6 +103,7 @@ void game_init(game_t *g)
     sfRenderWindow_setFramerateLimit(g->window, 60);
     init_sprite(g);
     ennemy_init(g);
+    create_fight(&g->fight);
     create_menu(&g->menu);
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});
     g->clock = sfClock_create();
@@ -154,6 +156,10 @@ static void update(game_t *g)
         if (!finished)
             sfRenderWindow_setView(g->window, g->camera);
     }
+    if (g->state == FIGHT) {
+        sprite_animation(g->fight.player.sprite, g, 30, 320);
+      //  sprite_animation(g->fight.opponent.sprite, g, 25, 384);
+    }
 }
 
 static void render(game_t *g)
@@ -176,7 +182,11 @@ static void render(game_t *g)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
     if (g->state == FIGHT) {
-        sfRenderWindow_drawSprite(g->window, g->menu.sprite, NULL);
+            sfRenderWindow_drawSprite(g->window, g->fight.scene.sprite, NULL);
+           sfRenderWindow_drawSprite(g->window, g->fight.platform1.sprite, NULL);
+           sfRenderWindow_drawSprite(g->window, g->fight.platform2.sprite, NULL);
+           sfRenderWindow_drawSprite(g->window, g->fight.opponent.sprite, NULL);
+             sfRenderWindow_drawSprite(g->window, g->fight.player.sprite, NULL);
     }
     sfRenderWindow_display(g->window);
 }

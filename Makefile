@@ -17,6 +17,7 @@ SRC    =	src/main.c					\
 			src/player_movement.c       \
 			src/utils.c 				\
 			src/interact.c 				\
+			src/fight.c
 
 
 OBJ =   	$(SRC:.c=.o)
