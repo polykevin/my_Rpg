@@ -19,7 +19,7 @@ static void run_snow_map(game_t *game, level_t *level, G_menu_t *menu)
             return;
         sfRenderWindow_clear(WINDOW, sfBlack);
         display_action(game, level);
-        display_game_menu(game, menu);
+        display_game_menu(game, menu, level);
         sfRenderWindow_display(WINDOW);
     }
 }
@@ -34,6 +34,7 @@ void snow_map(game_t *game)
     sfRenderWindow_setView(WINDOW, game->camera);
     inizialize_snow_level(&level);
     inizialize_game_menu(&menu);
+    default_game(&level, &menu);
     run_snow_map(game, &level, &menu);
     destroy_snow(&level);
     destroy_game_menu(&menu);

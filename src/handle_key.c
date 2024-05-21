@@ -7,8 +7,12 @@
 
 #include "snow_header.h"
 
-int menu_enter(G_menu_t *menu)
+int menu_enter(G_menu_t *menu, level_t *level, game_t *game)
 {
+    if (menu->menu_nb == 0) {
+        menu->bag = ON;
+        print_inventory(menu, level, game);
+    }
     if (menu->menu_nb == 5)
         return FAIL;
     return (0);

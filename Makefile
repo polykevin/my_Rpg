@@ -9,17 +9,11 @@ SRC    =	src/main.c					\
 			src/button.c 				\
 			src/sprite.c				\
 			src/menu.c					\
-			src/snow_map.c	            \
-			src/action_key.c	        \
 			src/map_movement.c	        \
 			src/start_game_menu.c	    \
-			src/handle_key.c	        \
 			src/time.c	                \
 			src/check_contact.c	        \
 			src/display.c	            \
-			src/destroy_snow.c	        \
-			src/inizialize_snow_map.c	\
-			src/inizialize_game_menu.c	\
 			src/player_movement.c       \
 			src/utils.c 				\
 
