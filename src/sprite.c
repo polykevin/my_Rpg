@@ -34,8 +34,9 @@ void sprite_animation(sprite_t *s, game_t *g, int offset, int max)
     }
     if (s->accumulator >= 0.28) {
         s->texture_rect.left += offset;
-        if (s->texture_rect.left < max)
+        if (s->texture_rect.left < max) {
             sfSprite_setTextureRect(s->sprite, s->texture_rect);
+        }
         s->accumulator = 0;
     }
     s->accumulator += g->delta_time;

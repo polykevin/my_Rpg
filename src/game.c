@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include "button.h"
 #include "menu.h"
+#include "player_movement.h"
 #include "sprite.h"
 #include "game.h"
 #include "my.h"
@@ -68,6 +69,16 @@ void ennemy_init(game_t *g)
     }
 }
 
+static void init_player_sprite(game_t *g)
+{
+    sprite_init(&g->player, "resource/player/idle.png",
+        (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
+    g->player_textures[0] = g->player.texture;
+    g->player_textures[1] =
+        sfTexture_createFromFile("resource/player/walk.png", NULL);
+    g->player_state = IDLE;
+}
+
 void game_init(game_t *g)
 {
     g->mode.width = WIDTH;
@@ -77,9 +88,9 @@ void game_init(game_t *g)
     sfResize | sfClose, NULL);
     g->state = MENU;
     sfRenderWindow_setFramerateLimit(g->window, 60);
-    sprite_init(&g->player, "idle.png", (sfIntRect){0, 0, PLAYER_SPRITE_SIZE,
-        PLAYER_SPRITE_SIZE});
-    sprite_init(&g->map, "map.png", (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
+    init_player_sprite(g);
+    sprite_init(&g->map, "resource/map/map.png",
+        (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
     sfSprite_setScale(g->map.sprite, (sfVector2f){4, 4});
     sfSprite_setScale(g->player.sprite, (sfVector2f){4, 4});
     sfSprite_setPosition(g->player.sprite, (sfVector2f){MAP_WIDTH * 1.87,
@@ -126,7 +137,9 @@ static void update(game_t *g)
         sfRenderWindow_setView(g->window, g->camera);
     }
     if (g->state == MAP) {
-        sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+        if (!player_movement(g)) {
+            sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+        }
         sfRenderWindow_setView(g->window, g->camera);
     }
 }

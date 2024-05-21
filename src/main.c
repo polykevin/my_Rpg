@@ -1,18 +1,17 @@
 /*
 ** EPITECH PROJECT, 2024
-** main
+** RPG
 ** File description:
 ** main
 */
 #include "game.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-    game_t my_paint = {0};
-    char *filename = NULL;
+    game_t my_rpg = {0};
 
-    game_init(&my_paint);
-    game_loop(&my_paint);
-    game_free(&my_paint);
-    return 0;
+    game_init(&my_rpg);
+    game_loop(&my_rpg);
+    game_free(&my_rpg);
+    return (0);
 }

@@ -18,9 +18,9 @@
 
 static void init_texture_filename(menu_t *menu)
 {
-    menu->texture_filenames[0] = "start.png";
-    menu->texture_filenames[1] = "exit.png";
-    menu->texture_filenames[2] = "options.png";
+    menu->texture_filenames[0] = "resource/menu/start.png";
+    menu->texture_filenames[1] = "resource/menu/exit.png";
+    menu->texture_filenames[2] = "resource/menu/options.png";
 }
 
 static void create_buttons_menu(menu_t *menu)
@@ -69,7 +69,8 @@ void create_menu(menu_t *menu)
 {
     menu->buttons = malloc(sizeof(button_menu_t *) * NB_BUTTON);
     menu->texture_filenames = malloc(sizeof(char *) * NB_BUTTON);
-    menu->texture = sfTexture_createFromFile("sky_menu.png", NULL);
+    menu->texture = sfTexture_createFromFile("resource/menu/sky_menu.png",
+    NULL);
     menu->sprite = sfSprite_create();
     init_texture_filename(menu);
     sfSprite_setTexture(menu->sprite, menu->texture, sfTrue);

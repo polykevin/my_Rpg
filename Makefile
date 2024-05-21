@@ -2,14 +2,20 @@
 ## EPITECH PROJECT, 2023
 ## Makefile
 ## File description:
-## No file there , just an epitech header example .
-## You can even have multiple lines if you want !
+## Makefile
 ##
-SRC    =	src/main.c	\
-			src/game.c  \
-			src/button.c \
-			src/sprite.c	\
-			src/menu.c	\
+SRC    =	src/main.c					\
+			src/game.c  				\
+			src/button.c 				\
+			src/sprite.c				\
+			src/menu.c					\
+			src/map_movement.c	        \
+			src/start_game_menu.c	    \
+			src/time.c	                \
+			src/check_contact.c	        \
+			src/display.c	            \
+			src/player_movement.c       \
+			src/utils.c 				\
 
 
 OBJ =   	$(SRC:.c=.o)

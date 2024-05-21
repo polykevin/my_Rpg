@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** button
+** RPG
 ** File description:
 ** button
 */
