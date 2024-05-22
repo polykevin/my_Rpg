@@ -14,6 +14,8 @@ typedef struct fight {
     sprite_t player;
     sprite_t opponent;
     sprite_t skills;
+    sprite_t skills2;
+    sprite_t bar;
     sprite_t life_player;
     sprite_t life_opponent;
     sprite_t platform1;
@@ -21,6 +23,8 @@ typedef struct fight {
     sprite_t rock;
     sprite_t paper;
     sprite_t cisor;
+    sprite_t life;
+    sprite_t life2;
 } fight_t;
 
 void create_fight(fight_t *fight);

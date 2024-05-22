@@ -83,7 +83,7 @@ static void init_sprite(game_t *g)
     g->player.animation_speed = 0.28;
     sprite_init(&g->map, "resource/map/map.png",
         (sfIntRect){0, 0, MAP_WIDTH, MAP_HEIGHT});
-    sprite_init(&g->interact, "resource/interact.png",
+    sprite_init(&g->interact, "resource/map/interact.png",
         (sfIntRect){0, 0, INTERACT_WIDTH, INTERACT_HEIGHT});
     sfSprite_setScale(g->map.sprite, (sfVector2f){4, 4});
     g->interact.animation_speed = 0.10;

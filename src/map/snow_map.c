@@ -25,11 +25,6 @@ static void run_snow_map(game_t *game, level_t *level, G_menu_t *menu)
     }
 }
 
-// inizialize_player(game_t *g)
-// {
-
-// }
-
 void snow_map(game_t *game)
 {
     level_t level;
@@ -38,7 +33,6 @@ void snow_map(game_t *game)
     sfView_setCenter(game->camera, (sfVector2f){MAP_WIDTH * 2,
             MAP_HEIGHT * 2});
     sfRenderWindow_setView(WINDOW, game->camera);
-    // inizialize_player(game);
     inizialize_snow_level(&level);
     inizialize_game_menu(&menu);
     default_game(&level, &menu);
