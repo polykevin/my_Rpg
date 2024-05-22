@@ -25,6 +25,12 @@ typedef struct fight {
     sprite_t cisor;
     sprite_t life;
     sprite_t life2;
+    sprite_t fire;
+    sprite_t defense;
+    sprite_t other;
+    sprite_t fire2;
+    sprite_t defense2;
+    sprite_t other2;
 } fight_t;
 
 void create_fight(fight_t *fight);

@@ -59,9 +59,53 @@ static void init_player(fight_t *fight)
         (sfIntRect){0, 0, 220, 90});
 }
 
+static int set_stats(int xp)
+{
+    if (xp == 1)
+        return;
+    if (xp == 2)
+        return;
+    if (xp == 3)
+        return;
+}
+
+static void set_pos_stats(fight_t *fight)
+{
+    sfSprite_setPosition(fight->fire.sprite, (sfVector2f){169, 50});
+    sfSprite_setPosition(fight->defense.sprite, (sfVector2f){169, 130});
+    sfSprite_setPosition(fight->other.sprite, (sfVector2f){169, 170});
+    sfSprite_setScale(fight->fire.sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(fight->defense.sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(fight->other.sprite, (sfVector2f){2, 2});
+    sfSprite_setPosition(fight->fire2.sprite, (sfVector2f){1559, 50});
+    sfSprite_setPosition(fight->defense2.sprite, (sfVector2f){1559, 130});
+    sfSprite_setPosition(fight->other2.sprite, (sfVector2f){1559, 170});
+    sfSprite_setScale(fight->fire2.sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(fight->defense2.sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(fight->other2.sprite, (sfVector2f){2, 2});
+}
+
+static void create_stats(fight_t *fight)
+{
+    sprite_init(&fight->fire, "resource/fight/ui.png",
+        (sfIntRect){230, 0, 150, 40});
+    sprite_init(&fight->defense, "resource/fight/ui.png",
+        (sfIntRect){230, 40, 150, 20});
+    sprite_init(&fight->other, "resource/fight/ui.png",
+        (sfIntRect){230, 60, 150, 20});
+    sprite_init(&fight->fire2, "resource/fight/ui.png",
+        (sfIntRect){230, 0, 150, 40});
+    sprite_init(&fight->defense2, "resource/fight/ui.png",
+        (sfIntRect){230, 40, 150, 20});
+    sprite_init(&fight->other2, "resource/fight/ui.png",
+        (sfIntRect){230, 60, 150, 20});
+    set_pos_stats(fight);
+}
+
 void create_fight(fight_t *fight)
 {
     init_player(fight);
+    create_stats(fight);
     sprite_init(&fight->scene, "resource/fight/scene1.png",
         (sfIntRect){0, 0, 1920, 1080});
     sprite_init(&fight->bar, "resource/fight/ui.png",

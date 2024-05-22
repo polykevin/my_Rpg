@@ -49,5 +49,11 @@ void game_render_fight(game_t *g)
         sfRenderWindow_drawSprite(g->window, g->fight.paper.sprite, NULL);
         sfRenderWindow_drawSprite(g->window, g->fight.rock.sprite, NULL);
         sfRenderWindow_drawSprite(g->window, g->fight.cisor.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
     }
 }
