@@ -36,42 +36,6 @@
 #include "fight.h"
 #include "my.h"
 
-static char **set_position(int i)
-{
-    if (i == 0)
-        return my_str_to_word_array("1.87,2.30", ',');
-    if (i == 1)
-        return my_str_to_word_array("2.7,1.77", ',');
-    if (i == 2)
-        return my_str_to_word_array("1.02,1.77", ',');
-    if (i == 3)
-        return my_str_to_word_array("1.87,1.32", ',');
-    return NULL;
-}
-
-static void ennemy_init(game_t *g)
-{
-    char **pos = NULL;
-    sprite_t *ennemy = NULL;
-    double x = 0;
-    double y = 0;
-
-    g->tab_ennemy = malloc(sizeof(sprite_t *) * 4);
-    for (int i = 0; i < 4; i++) {
-        ennemy = malloc(sizeof(sprite_t));
-        sprite_init(ennemy, "resource/player/idle.png",
-            (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
-        sfSprite_setScale(g->interact.sprite, (sfVector2f){0.15, 0.15});
-        sfSprite_setScale(ennemy->sprite, (sfVector2f){4, 4});
-        pos = set_position(i);
-        x = atof(pos[0]);
-        y = atof(pos[1]);
-        sfSprite_setPosition(ennemy->sprite, (sfVector2f){MAP_WIDTH * x,
-            MAP_HEIGHT * y});
-        g->tab_ennemy[i] = ennemy;
-    }
-}
-
 static void init_sprite(game_t *g)
 {
     sprite_init(&g->player, "resource/player/idle.png",
@@ -105,6 +69,7 @@ void game_init(game_t *g)
     ennemy_init(g);
     create_fight(&g->fight);
     create_menu(&g->menu);
+    well(&g->element);
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});
     g->clock = sfClock_create();
     g->time = sfClock_getElapsedTime(g->clock);

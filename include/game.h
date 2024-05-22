@@ -18,6 +18,7 @@
     #include "list.h"
     #include "sprite.h"
     #include "fight.h"
+    #include "map_elements.h"
 
 typedef struct text {
     sfText *text_obj;
@@ -43,6 +44,7 @@ typedef struct game {
     sfRenderWindow *window;
     menu_t menu;
     fight_t fight;
+    element_t element;
     sfEvent event;
     sprite_t player;
     player_state_t player_state;

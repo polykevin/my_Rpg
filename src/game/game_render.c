@@ -6,6 +6,7 @@
 */
 
 #include "game.h"
+#include "map_elements.h"
 
 void game_render_menu(game_t *g)
 {
@@ -26,6 +27,7 @@ void game_render_map(game_t *g)
                 g->tab_ennemy[i]->sprite, NULL);
         }
         sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->element.well.sprite, NULL);
         if (g->interact.draw)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
