@@ -16,6 +16,7 @@
     #include <SFML/Graphics.h>
     #include "menu.h"
     #include "list.h"
+    #include "snow_header.h"
     #include "sprite.h"
     #include "fight.h"
     #include "map_elements.h"
@@ -67,7 +68,6 @@ void game_loop(game_t *g);
 void game_free(game_t *g);
 void snow_map(game_t *game);
 void game_update_fight(game_t *g);
-void game_update_map(game_t *g);
 void game_update_menu(game_t *g);
 void game_render_menu(game_t *g);
 void game_render_map(game_t *g);
