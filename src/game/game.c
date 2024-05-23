@@ -125,7 +125,6 @@ static void render(game_t *g)
 void game_loop(game_t *g)
 {
     while (sfRenderWindow_isOpen(g->window)) {
-        // g->state = FIGHT;
         poll_events(g);
         update(g);
         render(g);

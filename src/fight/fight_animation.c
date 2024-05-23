@@ -19,7 +19,7 @@ static void change_choice_sprite2(fight_t *fight, choice_t choice)
         sfSprite_setTextureRect(fight->player_choice_sprite.sprite,
             (sfIntRect){15, 0, 105, 150});
         sfSprite_setScale(fight->player_choice_sprite.sprite,
-            (sfVector2f){0.7, 0.7});
+            (sfVector2f){1, 1});
     }
     if (choice == PAPER) {
         sfSprite_setTexture(fight->player_choice_sprite.sprite,
@@ -27,7 +27,7 @@ static void change_choice_sprite2(fight_t *fight, choice_t choice)
         sfSprite_setTextureRect(fight->player_choice_sprite.sprite,
             (sfIntRect){122, 0, 108, 150});
         sfSprite_setScale(fight->player_choice_sprite.sprite,
-            (sfVector2f){0.6, 0.6});
+            (sfVector2f){0.8, 0.8});
     }
 }
 
@@ -40,7 +40,7 @@ static void change_choice_sprite(fight_t *fight, choice_t choice)
         sfSprite_setTextureRect(fight->player_choice_sprite.sprite,
             (sfIntRect){230, 0, 105, 150});
         sfSprite_setScale(fight->player_choice_sprite.sprite,
-            (sfVector2f){0.65, 0.65});
+            (sfVector2f){0.8, 0.8});
     }
 }
 
@@ -68,7 +68,7 @@ static void case_rock_and_paper(fight_t *fight, double choice)
         sfSprite_setTextureRect(fight->opponent_choice_sprite.sprite,
             (sfIntRect){15, 0, 105, 150});
         sfSprite_setScale(fight->opponent_choice_sprite.sprite,
-            (sfVector2f){0.7, 0.7});
+            (sfVector2f){1, 1});
         fight->opponent_choice = ROCK;
     }
     if (choice >= 1 && choice < 2) {
@@ -77,7 +77,7 @@ static void case_rock_and_paper(fight_t *fight, double choice)
         sfSprite_setTextureRect(fight->opponent_choice_sprite.sprite,
             (sfIntRect){122, 0, 108, 150});
         sfSprite_setScale(fight->opponent_choice_sprite.sprite,
-            (sfVector2f){0.6, 0.6});
+            (sfVector2f){0.8, 0.8});
         fight->opponent_choice = PAPER;
     }
 }
@@ -93,7 +93,7 @@ static void change_sprite(fight_t *fight, game_t *g)
         sfSprite_setTextureRect(fight->opponent_choice_sprite.sprite,
             (sfIntRect){230, 0, 105, 150});
         sfSprite_setScale(fight->opponent_choice_sprite.sprite,
-            (sfVector2f){0.65, 0.65});
+            (sfVector2f){0.8, 0.8});
         fight->opponent_choice = CISOR;
     }
     if (choice >= 3)
@@ -107,4 +107,3 @@ void choosing_animation(fight_t *fight, game_t *g)
         change_sprite(fight, g);
     }
 }
-

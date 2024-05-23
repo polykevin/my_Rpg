@@ -44,13 +44,12 @@ static void game_render_fight_scene(game_t *g)
     sfRenderWindow_drawSprite(g->window, g->fight.life2.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->fight.skills.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->fight.skills2.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.case1.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.case2.sprite, NULL);
     if (g->fight.player_choice != CHOOSING) {
-        sfRenderWindow_drawSprite(g->window,
-            g->fight.player_bubble.sprite, NULL);
         sfRenderWindow_drawSprite(g->window,
             g->fight.player_choice_sprite.sprite, NULL);
     }
-    sfRenderWindow_drawSprite(g->window, g->fight.opponent_bubble.sprite, NULL);
     sfRenderWindow_drawSprite(g->window,
         g->fight.opponent_choice_sprite.sprite, NULL);
 }

@@ -42,6 +42,8 @@ typedef struct fight {
     sprite_t opponent_bubble;
     sprite_t opponent_choice_sprite;
     sprite_t player_choice_sprite;
+    sprite_t case1;
+    sprite_t case2;
     int opponent_idx;
     choice_t player_choice;
     choice_t opponent_choice;

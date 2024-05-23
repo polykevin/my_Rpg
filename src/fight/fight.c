@@ -25,8 +25,6 @@ static void set_scale(fight_t *fight)
     sfSprite_setScale(fight->skills.sprite, (sfVector2f){2, 2});
     sfSprite_setScale(fight->skills2.sprite, (sfVector2f){2, 2});
     sfSprite_setScale(fight->bar.sprite, (sfVector2f){2.5, 2.5});
-    sfSprite_setScale(fight->player_bubble.sprite, (sfVector2f){-2.0, 2.0});
-    sfSprite_setScale(fight->opponent_bubble.sprite, (sfVector2f){2.0, 2.0});
 }
 
 static void set_position(fight_t *fight)
@@ -43,12 +41,10 @@ static void set_position(fight_t *fight)
     sfSprite_setPosition(fight->skills.sprite, (sfVector2f){10, 50});
     sfSprite_setPosition(fight->skills2.sprite, (sfVector2f){1400, 50});
     sfSprite_setPosition(fight->bar.sprite, (sfVector2f){750, 800});
-    sfSprite_setPosition(fight->player_bubble.sprite, (sfVector2f){840, 290});
-    sfSprite_setPosition(fight->opponent_bubble.sprite, (sfVector2f){1200, 290});
     sfSprite_setPosition(fight->opponent_choice_sprite.sprite,
-        (sfVector2f){1260, 340});
+        (sfVector2f){1060, 240});
     sfSprite_setPosition(fight->player_choice_sprite.sprite,
-        (sfVector2f){715, 340});
+        (sfVector2f){860, 240});
 }
 
 static void init_player(fight_t *fight)
@@ -146,11 +142,24 @@ static void fight_init(fight_t *fight)
         (sfIntRect){15, 0, 105, 150});
 }
 
+void set_attack(fight_t *fight)
+{
+    sprite_init(&fight->case1, "resource/fight/ui.png",
+        (sfIntRect){82, 80, 48, 100});
+    sprite_init(&fight->case2, "resource/fight/ui.png",
+        (sfIntRect){82, 80, 48, 100});
+    sfSprite_setPosition(fight->case1.sprite, (sfVector2f){820, 150});
+    sfSprite_setPosition(fight->case2.sprite, (sfVector2f){1020, 150});
+    sfSprite_setScale(fight->case1.sprite, (sfVector2f){3.5, 3.5});
+    sfSprite_setScale(fight->case2.sprite, (sfVector2f){3.5, 3.5});
+}
+
 void create_fight(fight_t *fight)
 {
     init_player(fight);
     create_stats(fight);
     fight_init(fight);
+    set_attack(fight);
     fight->player.animation_speed = 0.18;
     fight->opponent.animation_speed = 0.18;
     fight->opponent_choice = CHOOSING;

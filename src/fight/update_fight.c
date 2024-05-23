@@ -65,7 +65,8 @@ static void end_of_round(fight_t *fight, game_t *g)
         fight->opponent_choice = CHOOSING;
         accumulator = 0.0;
     }
-    if (!(fight->opponent_choice != CHOOSING && fight->player_choice != CHOOSING)) {
+    if (!(fight->opponent_choice != CHOOSING
+        && fight->player_choice != CHOOSING)) {
         return;
     }
     win_handle(&accumulator, fight, g);
@@ -79,4 +80,3 @@ void update_fight(fight_t *fight, game_t *g)
     select_animation(&fight->cisor, (sfVector2f){0.65, 0.65}, fight, CISOR);
     choosing_animation(fight, g);
 }
-
