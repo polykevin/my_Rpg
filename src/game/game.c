@@ -73,6 +73,8 @@ void game_init(game_t *g)
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});
     g->clock = sfClock_create();
     g->time = sfClock_getElapsedTime(g->clock);
+    g->player_live = 120;
+    g->opponent_live = 120;
 }
 
 static void poll_events(game_t *g)
@@ -85,6 +87,12 @@ static void poll_events(game_t *g)
         }
         if (g->event.type == sfEvtMouseMoved && g->state == MENU) {
             menu_event(&g->menu, &g->event);
+        }
+        if (g->event.type == sfEvtMouseButtonPressed && g->state == FIGHT) {
+            fight_event(&g->fight, &g->event);
+        }
+        if (g->event.type == sfEvtMouseMoved && g->state == FIGHT) {
+            fight_event(&g->fight, &g->event);
         }
     }
 }
@@ -114,9 +122,10 @@ static void render(game_t *g)
     sfRenderWindow_display(g->window);
 }
 
-int game_loop(game_t *g)
+void game_loop(game_t *g)
 {
     while (sfRenderWindow_isOpen(g->window)) {
+        // g->state = FIGHT;
         poll_events(g);
         update(g);
         render(g);

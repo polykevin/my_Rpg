@@ -5,8 +5,10 @@
 ** Game render functions
 */
 
+#include "fight.h"
 #include "game.h"
 #include "map_elements.h"
+#include <SFML/Graphics/RenderWindow.h>
 
 void game_render_menu(game_t *g)
 {
@@ -33,27 +35,49 @@ void game_render_map(game_t *g)
     }
 }
 
+static void game_render_fight_scene(game_t *g)
+{
+    sfRenderWindow_drawSprite(g->window, g->fight.scene.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.platform1.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.platform2.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.life.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.life2.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.skills.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.skills2.sprite, NULL);
+    if (g->fight.player_choice != CHOOSING) {
+        sfRenderWindow_drawSprite(g->window,
+            g->fight.player_bubble.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window,
+            g->fight.player_choice_sprite.sprite, NULL);
+    }
+    sfRenderWindow_drawSprite(g->window, g->fight.opponent_bubble.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->fight.opponent_choice_sprite.sprite, NULL);
+}
+
+static void game_render_fight_ui(game_t *g)
+{
+    sfRenderWindow_drawSprite(g->window, g->fight.bar.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->fight.paper.sprite.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->fight.rock.sprite.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->fight.cisor.sprite.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
+}
+
 void game_render_fight(game_t *g)
 {
     if (g->state == FIGHT) {
-        sfRenderWindow_drawSprite(g->window, g->fight.scene.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.platform1.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.platform2.sprite, NULL);
+        game_render_fight_scene(g);
         sfRenderWindow_drawSprite(g->window, g->fight.opponent.sprite, NULL);
         sfRenderWindow_drawSprite(g->window, g->fight.player.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.life.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.life2.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.skills.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.skills2.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.bar.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.paper.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.rock.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.cisor.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
-        sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
+        game_render_fight_ui(g);
     }
 }

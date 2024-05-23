@@ -4,6 +4,7 @@
 ** File description:
 ** game update functions
 */
+#include "fight.h"
 #include "game.h"
 #include "player_movement.h"
 #include "interact.h"
@@ -40,6 +41,7 @@ void game_update_map(game_t *g)
 void game_update_fight(game_t *g)
 {
     if (g->state == FIGHT) {
+        update_fight(&g->fight, g);
         sprite_animation(&g->fight.player, g, 80, 320);
         sprite_animation(&g->fight.opponent, g, 32, 120);
     }

@@ -1,17 +1,17 @@
 /*
 ** EPITECH PROJECT, 2024
-** RPG
+** button
 ** File description:
-** button functions
+** button
 */
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Texture.h>
+#include <stdlib.h>
 #include "button.h"
-#include "sprite.h"
 
-static sfBool is_button_clicked(button_t *b, sfMouseButtonEvent *m)
+static sfBool is_button_clicked(button_menu_t *b, sfMouseButtonEvent *m)
 {
-    sfFloatRect rect = sfSprite_getGlobalBounds(b->sprite.sprite);
+    sfFloatRect rect = sfSprite_getGlobalBounds(b->sprite);
 
     if (m->type == sfEvtMouseButtonPressed &&
         sfFloatRect_contains(&rect, m->x, m->y) &&
@@ -27,9 +27,9 @@ static sfBool is_button_clicked(button_t *b, sfMouseButtonEvent *m)
     return sfFalse;
 }
 
-static sfBool is_button_hover(button_t *b, sfMouseMoveEvent *m)
+static sfBool is_button_hover(button_menu_t *b, sfMouseMoveEvent *m)
 {
-    sfFloatRect rect = sfSprite_getGlobalBounds(b->sprite.sprite);
+    sfFloatRect rect = sfSprite_getGlobalBounds(b->sprite);
 
     if (b->state == CLICKED)
         return sfFalse;
@@ -42,15 +42,23 @@ static sfBool is_button_hover(button_t *b, sfMouseMoveEvent *m)
     return sfFalse;
 }
 
-void button_init(button_t *button, char *texture, sfIntRect rect)
+button_menu_t *create_button(char *texture_filename)
 {
-    sprite_init(&button->sprite, texture, rect);
+    button_menu_t *button = malloc(sizeof(button_menu_t));
+
+    button->texture = sfTexture_createFromFile(texture_filename, NULL);
+    button->sprite = sfSprite_create();
     button->is_clicked = is_button_clicked;
     button->is_hover = is_button_hover;
     button->state = NORMAL;
+    sfSprite_setTexture(button->sprite, button->texture, sfTrue);
+    sfSprite_setScale(button->sprite, (sfVector2f){1, 1});
+    return button;
 }
 
-void free_button(button_t *button)
+void destroy_button(button_menu_t *button)
 {
-    sprite_free(&button->sprite);
+    sfTexture_destroy(button->texture);
+    sfSprite_destroy(button->sprite);
+    free(button);
 }

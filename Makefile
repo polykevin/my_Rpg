@@ -25,10 +25,13 @@ SRC    =	src/main.c										\
 			src/inventory/start_game_menu.c					\
 			src/utils.c 									\
 			src/interact.c 									\
-			src/fight.c 									\
+			src/fight/fight.c								\
+			src/fight/fight_animation.c 					\
+			src/fight/update_fight.c 						\
 			src/game/game_update.c 							\
 			src/game/game_render.c 							\
-			src/map_elements.c
+			src/map_elements.c								\
+			src/button_menu.c 								\
 
 
 OBJ =   	$(SRC:.c=.o)

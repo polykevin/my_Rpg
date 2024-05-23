@@ -1,10 +1,14 @@
 /*
 ** EPITECH PROJECT, 2024
-** fight
+** RPG
 ** File description:
 ** fight
 */
+#include <SFML/Graphics/Sprite.h>
+#include <SFML/System/Vector2.h>
+#include "button.h"
 #include "game.h"
+#include "sprite.h"
 #include "fight.h"
 
 static void set_scale(fight_t *fight)
@@ -15,12 +19,14 @@ static void set_scale(fight_t *fight)
     sfSprite_setScale(fight->opponent.sprite, (sfVector2f){-15, 15});
     sfSprite_setScale(fight->life.sprite, (sfVector2f){4, 4});
     sfSprite_setScale(fight->life2.sprite, (sfVector2f){4, 4});
-    sfSprite_setScale(fight->paper.sprite, (sfVector2f){0.6, 0.6});
-    sfSprite_setScale(fight->cisor.sprite, (sfVector2f){0.65, 0.65});
-    sfSprite_setScale(fight->rock.sprite, (sfVector2f){0.7, 0.7});
+    sfSprite_setScale(fight->paper.sprite.sprite, (sfVector2f){0.6, 0.6});
+    sfSprite_setScale(fight->cisor.sprite.sprite, (sfVector2f){0.65, 0.65});
+    sfSprite_setScale(fight->rock.sprite.sprite, (sfVector2f){0.7, 0.7});
     sfSprite_setScale(fight->skills.sprite, (sfVector2f){2, 2});
     sfSprite_setScale(fight->skills2.sprite, (sfVector2f){2, 2});
     sfSprite_setScale(fight->bar.sprite, (sfVector2f){2.5, 2.5});
+    sfSprite_setScale(fight->player_bubble.sprite, (sfVector2f){-2.0, 2.0});
+    sfSprite_setScale(fight->opponent_bubble.sprite, (sfVector2f){2.0, 2.0});
 }
 
 static void set_position(fight_t *fight)
@@ -31,12 +37,18 @@ static void set_position(fight_t *fight)
     sfSprite_setPosition(fight->player.sprite, (sfVector2f){-30, 20});
     sfSprite_setPosition(fight->life.sprite, (sfVector2f){450, 430});
     sfSprite_setPosition(fight->life2.sprite, (sfVector2f){1300, 430});
-    sfSprite_setPosition(fight->rock.sprite, (sfVector2f){860, 860});
-    sfSprite_setPosition(fight->paper.sprite, (sfVector2f){980, 860});
-    sfSprite_setPosition(fight->cisor.sprite, (sfVector2f){1100, 860});
+    sfSprite_setPosition(fight->rock.sprite.sprite, (sfVector2f){860, 860});
+    sfSprite_setPosition(fight->paper.sprite.sprite, (sfVector2f){980, 860});
+    sfSprite_setPosition(fight->cisor.sprite.sprite, (sfVector2f){1100, 860});
     sfSprite_setPosition(fight->skills.sprite, (sfVector2f){10, 50});
     sfSprite_setPosition(fight->skills2.sprite, (sfVector2f){1400, 50});
     sfSprite_setPosition(fight->bar.sprite, (sfVector2f){750, 800});
+    sfSprite_setPosition(fight->player_bubble.sprite, (sfVector2f){840, 290});
+    sfSprite_setPosition(fight->opponent_bubble.sprite, (sfVector2f){1200, 290});
+    sfSprite_setPosition(fight->opponent_choice_sprite.sprite,
+        (sfVector2f){1260, 340});
+    sfSprite_setPosition(fight->player_choice_sprite.sprite,
+        (sfVector2f){715, 340});
 }
 
 static void init_player(fight_t *fight)
@@ -102,22 +114,48 @@ static void create_stats(fight_t *fight)
     set_pos_stats(fight);
 }
 
-void create_fight(fight_t *fight)
+void fight_event(fight_t *fight, sfEvent *event)
 {
-    init_player(fight);
-    create_stats(fight);
+    fight->rock.is_clicked(&fight->rock, &event->mouseButton);
+    fight->paper.is_clicked(&fight->paper, &event->mouseButton);
+    fight->cisor.is_clicked(&fight->cisor, &event->mouseButton);
+    fight->rock.is_hover(&fight->rock, &event->mouseMove);
+    fight->paper.is_hover(&fight->paper, &event->mouseMove);
+    fight->cisor.is_hover(&fight->cisor, &event->mouseMove);
+}
+
+static void fight_init(fight_t *fight)
+{
     sprite_init(&fight->scene, "resource/fight/scene1.png",
         (sfIntRect){0, 0, 1920, 1080});
     sprite_init(&fight->bar, "resource/fight/ui.png",
         (sfIntRect){0, 80, 220, 100});
-    sprite_init(&fight->rock, "resource/fight/rock.png",
+    sprite_init(&fight->player_bubble, "resource/fight/bubble.png",
+        (sfIntRect){0, 0, 95, 125});
+    sprite_init(&fight->opponent_bubble, "resource/fight/bubble.png",
+        (sfIntRect){0, 0, 95, 125});
+    button_init(&fight->rock, "resource/fight/rock.png",
         (sfIntRect){15, 0, 105, 150});
-    sprite_init(&fight->paper, "resource/fight/rock.png",
+    button_init(&fight->paper, "resource/fight/rock.png",
         (sfIntRect){122, 0, 108, 150});
-    sprite_init(&fight->cisor, "resource/fight/rock.png",
+    button_init(&fight->cisor, "resource/fight/rock.png",
         (sfIntRect){230, 0, 105, 150});
+    sprite_init(&fight->opponent_choice_sprite, "resource/fight/rock.png",
+        (sfIntRect){15, 0, 105, 150});
+    sprite_init(&fight->player_choice_sprite, "resource/fight/rock.png",
+        (sfIntRect){15, 0, 105, 150});
+}
+
+void create_fight(fight_t *fight)
+{
+    init_player(fight);
+    create_stats(fight);
+    fight_init(fight);
     fight->player.animation_speed = 0.18;
     fight->opponent.animation_speed = 0.18;
+    fight->opponent_choice = CHOOSING;
+    fight->player_choice = CHOOSING;
+    fight->opponent_idx = 0;
     set_position(fight);
     set_scale(fight);
 }

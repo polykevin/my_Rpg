@@ -58,10 +58,12 @@ typedef struct game {
     sfTime time;
     sfTime last_time;
     double delta_time;
+    int player_live;
+    int opponent_live;
 }game_t;
 
 void game_init(game_t *g);
-int game_loop(game_t *g);
+void game_loop(game_t *g);
 void game_free(game_t *g);
 void snow_map(game_t *game);
 void game_update_fight(game_t *g);
