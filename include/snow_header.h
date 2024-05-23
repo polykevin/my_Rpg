@@ -36,6 +36,7 @@
     #include <stdbool.h>
 
 // void snow_map(game_t *game);
+void game_update_map(game_t *g, G_menu_t *menu, level_t *level);
 int menu_enter(G_menu_t *menu, level_t *level, game_t *game);
 void game_handle_time(game_t *g);
 int run_action(level_t *level, game_t *game, G_menu_t *menu);
@@ -51,11 +52,12 @@ void map_movement(level_t *level, game_t *game, int direction);
 int check_contact(sfVector2f pos_1, sfRectangleShape *box_2);
 float time_as_seconds(sfClock *clock);
 void start_game_menu(game_t *game, G_menu_t *menu);
-void go_down(G_menu_t *menu);
-void go_up(G_menu_t *menu);
+// void go_down(G_menu_t *menu);
+// void go_up(G_menu_t *menu);
 void default_game(level_t *level, G_menu_t *menu);
 void print_inventory(G_menu_t *menu, level_t *level, game_t *game);
 void destroy_inventory(Inventory_t *inventory);
 bool player_movement(game_t *g);
+int inventory_on(G_menu_t *menu, level_t *level, game_t *game);
 
 #endif /* LS_HEADER_H_ */

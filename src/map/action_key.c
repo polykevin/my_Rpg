@@ -35,17 +35,21 @@ static int inventory(G_menu_t *menu, level_t *level)
     return 0;
 }
 
-static int inventory_on(G_menu_t *menu, level_t *level, game_t *game)
+int inventory_on(G_menu_t *menu, level_t *level, game_t *game)
 {
     if (menu->bag == ON)
         return (inventory(menu, level));
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
         menu->on_off = OFF;
     }
-    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyUp))
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyUp)) {
         go_up(menu);
-    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyDown))
+        wait_x_sec(0.15);
+    }
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyDown)) {
         go_down(menu);
+        wait_x_sec(0.15);
+    }
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEnter))
         return (menu_enter(menu, level, game));
     return (0);

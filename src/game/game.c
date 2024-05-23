@@ -31,6 +31,7 @@
 #include "interact.h"
 #include "menu.h"
 #include "player_movement.h"
+#include "snow_header.h"
 #include "sprite.h"
 #include "game.h"
 #include "fight.h"
@@ -105,11 +106,11 @@ void game_handle_time(game_t *g)
     - (g->last_time.microseconds / 1000000.0);
 }
 
-static void update(game_t *g)
+static void update(game_t *g, G_menu_t *menu, level_t *level)
 {
     game_handle_time(g);
     game_update_menu(g);
-    game_update_map(g);
+    game_update_map(g, menu, level);
     game_update_fight(g);
 }
 
@@ -119,16 +120,23 @@ static void render(game_t *g)
     game_render_menu(g);
     game_render_map(g);
     game_render_fight(g);
-    sfRenderWindow_display(g->window);
 }
 
 void game_loop(game_t *g)
 {
+    G_menu_t menu;
+    level_t level;
+
+    inizialize_game_menu(&menu);
+    default_game(&level, &menu);
     while (sfRenderWindow_isOpen(g->window)) {
         poll_events(g);
-        update(g);
+        update(g, &menu, &level);
         render(g);
+        display_game_menu(g, &menu, &level);
+        sfRenderWindow_display(g->window);
     }
+    destroy_game_menu(&menu);
 }
 
 void game_free(game_t *g)

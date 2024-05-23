@@ -8,6 +8,7 @@
 #include "game.h"
 #include "player_movement.h"
 #include "interact.h"
+#include "snow_header.h"
 
 void game_update_menu(game_t *g)
 {
@@ -22,19 +23,32 @@ void game_update_menu(game_t *g)
     }
 }
 
-void game_update_map(game_t *g)
+void inventory_off(game_t *g, G_menu_t *menu)
 {
     bool finished = false;
 
+    if (!player_movement(g)) {
+        sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+    }
+    if (is_interact(g, &finished)) {
+        sprite_animation(&g->interact, g, 1023, 7777);
+    }
+    if (!finished)
+        sfRenderWindow_setView(g->window, g->camera);
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyB)) {
+        wait_x_sec(0.1);
+        menu->on_off = ON;
+        start_game_menu(g, menu);
+    }
+}
+
+void game_update_map(game_t *g, G_menu_t *menu, level_t *level)
+{
     if (g->state == MAP) {
-        if (!player_movement(g)) {
-            sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
-        }
-        if (is_interact(g, &finished)) {
-            sprite_animation(&g->interact, g, 1023, 7777);
-        }
-        if (!finished)
-            sfRenderWindow_setView(g->window, g->camera);
+        if (menu->on_off == OFF)
+            inventory_off(g, menu);
+        else
+            inventory_on(menu, level, g);
     }
 }
 
