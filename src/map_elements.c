@@ -39,13 +39,23 @@
 static char **set_position(int i)
 {
     if (i == 0)
-        return my_str_to_word_array("1.87,2.30", ',');
+        return my_str_to_word_array("1.955, 2.65", ',');
     if (i == 1)
-        return my_str_to_word_array("2.7,1.77", ',');
+        return my_str_to_word_array("2.79,1.86", ',');
     if (i == 2)
-        return my_str_to_word_array("1.02,1.77", ',');
+        return my_str_to_word_array("1.125,1.86", ',');
     if (i == 3)
-        return my_str_to_word_array("1.87,1.32", ',');
+        return my_str_to_word_array("1.955,3.2", ',');
+    if (i == 4)
+        return my_str_to_word_array("3.29,1.86", ',');
+    if (i == 5)
+        return my_str_to_word_array("3.79,1.86", ',');
+    if (i == 6)
+        return my_str_to_word_array("0.625,1.86", ',');
+    if (i == 7)
+        return my_str_to_word_array("0.125,1.86", ',');
+    if (i == 8)
+        return my_str_to_word_array("1.955,3.75", ',');
     return NULL;
 }
 
@@ -56,13 +66,13 @@ void ennemy_init(game_t *g)
     double x = 0;
     double y = 0;
 
-    g->tab_ennemy = malloc(sizeof(sprite_t *) * 4);
-    for (int i = 0; i < 4; i++) {
+    g->tab_ennemy = malloc(sizeof(sprite_t *) * 10);
+    for (int i = 0; i < 9; i++) {
         ennemy = malloc(sizeof(sprite_t));
-        sprite_init(ennemy, "resource/player/idle.png",
-            (sfIntRect){0, 0, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE});
+        sprite_init(ennemy, "resource/player/Skeleton.png",
+            (sfIntRect){0, 35, 25, 30});
         sfSprite_setScale(g->interact.sprite, (sfVector2f){0.15, 0.15});
-        sfSprite_setScale(ennemy->sprite, (sfVector2f){4, 4});
+        sfSprite_setScale(ennemy->sprite, (sfVector2f){4.2, 4.2});
         pos = set_position(i);
         x = atof(pos[0]);
         y = atof(pos[1]);

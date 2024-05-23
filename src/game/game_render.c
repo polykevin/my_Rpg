@@ -24,7 +24,7 @@ void game_render_map(game_t *g)
 {
     if (g->state == MAP) {
         sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 9; i++) {
             sfRenderWindow_drawSprite(g->window,
                 g->tab_ennemy[i]->sprite, NULL);
         }

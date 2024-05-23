@@ -27,6 +27,10 @@ void game_update_map(game_t *g)
     bool finished = false;
 
     if (g->state == MAP) {
+        for (int i = 0; i < 9; i++) {
+            g->tab_ennemy[i]->animation_speed = 0.22;
+            sprite_animation(g->tab_ennemy[i], g, 32, 120);
+        }
         if (!player_movement(g)) {
             sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
         }

@@ -1,0 +1,7 @@
+./src/fight/update_fight.c:36: MAJOR:C-F4
+./src/fight/update_fight.c:37: MAJOR:C-F4
+./src/interact.c:22: MINOR:C-F8
+./src/interact.c:23: MINOR:C-F8
+./src/interact.c:24: MINOR:C-F8
+./src/interact.c:25: MINOR:C-F8
+./src/interact.c:52: MAJOR:C-F4

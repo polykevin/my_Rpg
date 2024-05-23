@@ -19,10 +19,6 @@ static void enemy_init(sfFloatRect *enemy, game_t *g, int i,
     sfVector2f *enemy_pos)
 {
     *enemy = sfSprite_getGlobalBounds(g->tab_ennemy[i]->sprite);
-    enemy->top += PLAYER_SPRITE_SIZE;
-    enemy->left += PLAYER_SPRITE_SIZE;
-    enemy->width = PLAYER_SPRITE_SIZE;
-    enemy->height = PLAYER_SPRITE_SIZE;
     *enemy_pos = sfSprite_getPosition(g->tab_ennemy[i]->sprite);
 }
 
@@ -32,7 +28,7 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
     sfFloatRect enemy;
     sfVector2f enemy_pos;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 9; i++) {
         enemy_init(&enemy, g, i, &enemy_pos);
         if (sfFloatRect_intersects(player, &enemy, NULL)
             && sfKeyboard_isKeyPressed(sfKeyEnter)) {
