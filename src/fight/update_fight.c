@@ -77,6 +77,42 @@ static void update_life(sprite_t *life, fight_t *fight, int life_nb)
     update_life2(life, fight, life_nb);
 }
 
+static void loose_handle_player(fight_t *fight, game_t *g)
+{
+    if (g->player.live <= 0) {
+        for (int i = 0; i < 12; i++) {
+            g->tab_ennemy[i]->dead = false;
+        }
+        g->player.money = 0;
+        g->player.live = 4;
+        g->opponent_live = 4;
+        g->player.money_str = my_int_to_str(g->player.money);
+        sfText_setString(g->player.money_text.text_obj,
+            g->player.money_str);
+        update_life(&g->player.life_sprite, fight, g->player.live);
+        update_life(&fight->life, fight, g->player.live);
+        update_life(&fight->life2, fight, g->opponent_live);
+    }
+}
+
+static void loose_handle(fight_t *fight, game_t *g)
+{
+    if (g->opponent_live <= 0 || g->player.live <= 0) {
+        if (g->opponent_live <= 0) {
+            g->player.money += 5;
+            g->player.money_str = my_int_to_str(g->player.money);
+            sfText_setString(g->player.money_text.text_obj,
+                g->player.money_str);
+            g->tab_ennemy[g->fight.opponent_idx]->dead = true;
+            g->opponent_live = 4;
+            update_life(&fight->life, fight, g->player.live);
+            update_life(&fight->life2, fight, g->opponent_live);
+        }
+        loose_handle_player(fight, g);
+        g->state = MAP;
+    }
+}
+
 static void win_handle2(fight_t *fight, game_t *g)
 {
     if (is_winning(fight->player_choice, fight->opponent_choice) == 1) {
@@ -88,15 +124,7 @@ static void win_handle2(fight_t *fight, game_t *g)
         update_life(&fight->life, fight, g->player.live);
         update_life(&g->player.life_sprite, fight, g->player.live);
     }
-    if (g->opponent_live <= 0 || g->player.live <= 0) {
-        if (g->opponent_live <= 0) {
-            g->player.money += 5;
-            g->player.money_str = my_int_to_str(g->player.money);
-            sfText_setString(g->player.money_text.text_obj,
-                g->player.money_str);
-        }
-        g->state = MAP;
-    }
+    loose_handle(fight, g);
 }
 
 static void win_handle(double *accumulator, fight_t *fight, game_t *g)
@@ -121,8 +149,7 @@ static void end_of_round(fight_t *fight, game_t *g)
         fight->opponent_choice = CHOOSING;
         accumulator = 0.0;
     }
-    if (!(fight->opponent_choice != CHOOSING
-        && fight->player_choice != CHOOSING)) {
+    if (fight->player_choice == CHOOSING) {
         return;
     }
     win_handle(&accumulator, fight, g);

@@ -20,16 +20,22 @@ void game_render_menu(game_t *g)
     }
 }
 
+static void game_render_map_enemies(game_t *g)
+{
+    for (int i = 0; i < 12; i++) {
+        if (!g->tab_ennemy[i]->dead)
+            sfRenderWindow_drawSprite(g->window,
+                g->tab_ennemy[i]->sprite, NULL);
+    }
+}
+
 void game_render_map(game_t *g)
 {
     if (g->state == MAP) {
         sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
         sfRenderWindow_drawText(g->window,
             g->player.money_text.text_obj, NULL);
-        for (int i = 0; i < 12; i++) {
-            sfRenderWindow_drawSprite(g->window,
-                g->tab_ennemy[i]->sprite, NULL);
-        }
+        game_render_map_enemies(g);
         sfRenderWindow_drawSprite(g->window,
             g->player.player_sprite.sprite, NULL);
         sfRenderWindow_drawSprite(g->window,

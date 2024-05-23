@@ -43,7 +43,8 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
             && sfKeyboard_isKeyPressed(sfKeyEnter)) {
             check_enemies2(vec, g, i, idx);
         }
-        if (sfFloatRect_intersects(player, &enemy, NULL)) {
+        if (sfFloatRect_intersects(player, &enemy, NULL) &&
+        !g->tab_ennemy[i]->dead) {
             g->interact.draw = true;
             sfSprite_setPosition(g->interact.sprite,
                 (sfVector2f){enemy_pos.x + 45, enemy_pos.y + 75});
@@ -75,6 +76,7 @@ static void end_fight_animation(vec2_double_t *vec, int *idx,
         vec->x = 0.0;
         vec->y = 1.0;
         g->fight.opponent_idx = *idx;
+        g->opponent_live = 4;
         *idx = 0;
         sfView_reset(g->camera, (sfFloatRect){0, 0, WIDTH, HEIGHT});
         sfView_setCenter(g->camera, (sfVector2f){MAP_WIDTH * 2,

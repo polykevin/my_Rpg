@@ -123,6 +123,7 @@ void ennemy_init(game_t *g)
         y = atof(pos[1]);
         sfSprite_setPosition(ennemy->sprite, (sfVector2f){MAP_WIDTH * x,
             MAP_HEIGHT * y});
+        ennemy->dead = false;
         g->tab_ennemy[i] = ennemy;
     }
 }

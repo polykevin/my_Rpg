@@ -24,24 +24,30 @@ void game_update_menu(game_t *g)
     }
 }
 
-void inventory_off(game_t *g, G_menu_t *menu)
+static void map_handle(game_t *g, bool *finished)
 {
-    bool finished = false;
-
     if (g->state == MAP) {
         for (int i = 0; i < 9; i++) {
             g->tab_ennemy[i]->animation_speed = 0.22;
             sprite_animation(g->tab_ennemy[i], g, 32, 120);
         }
         if (!player_movement(g)) {
-            sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+            sprite_animation(&g->player.player_sprite,
+                g, PLAYER_SPRITE_SIZE, 320);
         }
-        if (is_interact(g, &finished)) {
+        if (is_interact(g, finished)) {
             sprite_animation(&g->interact, g, 1023, 7777);
         }
         if (!finished)
             sfRenderWindow_setView(g->window, g->camera);
     }
+}
+
+void inventory_off(game_t *g, G_menu_t *menu)
+{
+    bool finished = false;
+
+    map_handle(g, &finished);
     if (!player_movement(g)) {
         sprite_animation(&g->player.player_sprite, g, PLAYER_SPRITE_SIZE, 320);
     }

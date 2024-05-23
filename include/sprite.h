@@ -14,6 +14,7 @@ typedef struct sprite {
     sfSprite *sprite;
     sfIntRect texture_rect;
     bool draw;
+    bool dead;
     double animation_speed;
     double accumulator;
 }sprite_t;
