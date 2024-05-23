@@ -28,7 +28,7 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
     sfFloatRect enemy;
     sfVector2f enemy_pos;
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 12; i++) {
         enemy_init(&enemy, g, i, &enemy_pos);
         if (sfFloatRect_intersects(player, &enemy, NULL)
             && sfKeyboard_isKeyPressed(sfKeyEnter)) {
