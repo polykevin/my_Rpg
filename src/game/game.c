@@ -106,12 +106,14 @@ void game_handle_time(game_t *g)
     - (g->last_time.microseconds / 1000000.0);
 }
 
-static void update(game_t *g, G_menu_t *menu, level_t *level)
+static int update(game_t *g, G_menu_t *menu, level_t *level)
 {
     game_handle_time(g);
     game_update_menu(g);
-    game_update_map(g, menu, level);
+    if (game_update_map(g, menu, level) == FAIL)
+        return FAIL;
     game_update_fight(g);
+    return (0);
 }
 
 static void render(game_t *g)
@@ -126,12 +128,13 @@ void game_loop(game_t *g)
 {
     G_menu_t menu;
     level_t level;
+    int exit = 0;
 
     inizialize_game_menu(&menu);
     default_game(&level, &menu);
-    while (sfRenderWindow_isOpen(g->window)) {
+    while (sfRenderWindow_isOpen(g->window) && exit != FAIL) {
         poll_events(g);
-        update(g, &menu, &level);
+        exit = update(g, &menu, &level);
         render(g);
         display_game_menu(g, &menu, &level);
         sfRenderWindow_display(g->window);

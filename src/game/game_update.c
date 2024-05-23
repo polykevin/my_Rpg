@@ -42,14 +42,15 @@ void inventory_off(game_t *g, G_menu_t *menu)
     }
 }
 
-void game_update_map(game_t *g, G_menu_t *menu, level_t *level)
+int game_update_map(game_t *g, G_menu_t *menu, level_t *level)
 {
     if (g->state == MAP) {
         if (menu->on_off == OFF)
             inventory_off(g, menu);
         else
-            inventory_on(menu, level, g);
+            return (inventory_on(menu, level, g));
     }
+    return 0;
 }
 
 void game_update_fight(game_t *g)

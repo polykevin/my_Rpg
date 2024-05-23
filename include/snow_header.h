@@ -36,7 +36,7 @@
     #include <stdbool.h>
 
 // void snow_map(game_t *game);
-void game_update_map(game_t *g, G_menu_t *menu, level_t *level);
+int game_update_map(game_t *g, G_menu_t *menu, level_t *level);
 int menu_enter(G_menu_t *menu, level_t *level, game_t *game);
 void game_handle_time(game_t *g);
 int run_action(level_t *level, game_t *game, G_menu_t *menu);
