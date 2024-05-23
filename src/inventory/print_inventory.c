@@ -7,15 +7,11 @@
 
 #include "snow_header.h"
 
-char inv_atoi(int num)
+char *inv_atoi(int num)
 {
     int length = snprintf(NULL, 0, "%d", num);
     char *str = (char *)malloc((length + 1) * sizeof(char));
 
-    if (str == NULL) {
-        fprintf(stderr, "No se pudo asignar memoria\n");
-        exit(1);
-    }
     sprintf(str, "%d", num);
     return str;
 }

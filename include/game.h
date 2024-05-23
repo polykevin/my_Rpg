@@ -143,4 +143,6 @@ void update_fight(fight_t *fight, game_t *g);
 void choosing_animation(fight_t *fight, game_t *g);
 void select_animation(button_t *button, sfVector2f scale,
     fight_t *fight, choice_t choice);
+void save_file(main_player_t player);
+char *load_file(main_player_t *player);
 #endif
