@@ -4,6 +4,8 @@
 ** File description:
 ** main
 */
+#include "stats.h"
+#include "fight.h"
 #include "game.h"
 
 int main(int argc, char **argv)

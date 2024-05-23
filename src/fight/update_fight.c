@@ -107,6 +107,13 @@ static void loose_handle(fight_t *fight, game_t *g)
             g->opponent_live = 4;
             update_life(&fight->life, fight, g->player.live);
             update_life(&fight->life2, fight, g->opponent_live);
+            if (fight->opponent_idx >= 0 && fight->opponent_idx <= 2)
+                g->player.speed_xp++;
+            if (fight->opponent_idx >= 3 && fight->opponent_idx <= 5)
+                g->player.defense_xp++;
+            if (fight->opponent_idx >= 6 && fight->opponent_idx <= 8)
+                g->player.attack_xp++;
+            change_level(&g->player, fight);
         }
         loose_handle_player(fight, g);
         g->state = MAP;
@@ -116,7 +123,7 @@ static void loose_handle(fight_t *fight, game_t *g)
 static void win_handle2(fight_t *fight, game_t *g)
 {
     if (is_winning(fight->player_choice, fight->opponent_choice) == 1) {
-        g->opponent_live--;
+        g->opponent_live -= g->player.attack;
         update_life(&fight->life2, fight, g->opponent_live);
     }
     if (is_winning(fight->player_choice, fight->opponent_choice) == 0){

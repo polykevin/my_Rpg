@@ -38,34 +38,34 @@
 
 static char **set_position2(int i)
 {
-    if (i == 7)
+    if (i == 8) //3 a gauche
         return my_str_to_word_array("0.125,1.86", ',');
-    if (i == 8)
-        return my_str_to_word_array("1.955,3.75", ',');
-    if (i == 9)
+    if (i == 9) //boss a gauche
         return my_str_to_word_array("1.65,0.55", ',');
-    if (i == 10)
+    if (i == 10) //boss milieu
         return my_str_to_word_array("1.925,0.55", ',');
-    if (i == 11)
+    if (i == 11) //boss a droite
         return my_str_to_word_array("2.2,0.55", ',');
     return NULL;
 }
 
 static char **set_position(int i)
 {
-    if (i == 0)
+    if (i == 0) // 1 en bas
         return my_str_to_word_array("1.955, 2.65", ',');
-    if (i == 1)
-        return my_str_to_word_array("2.79,1.86", ',');
-    if (i == 2)
-        return my_str_to_word_array("1.125,1.86", ',');
-    if (i == 3)
+    if (i == 1) //2
         return my_str_to_word_array("1.955,3.2", ',');
-    if (i == 4)
+    if (i == 2)//3 en bas
+        return my_str_to_word_array("1.955,3.75", ',');
+    if (i == 3) //1 a droite
+        return my_str_to_word_array("2.79,1.86", ',');
+    if (i == 4) //2
         return my_str_to_word_array("3.29,1.86", ',');
-    if (i == 5)
+    if (i == 5) //3
         return my_str_to_word_array("3.79,1.86", ',');
-    if (i == 6)
+    if (i == 6)// 1 a gauche
+        return my_str_to_word_array("1.125,1.86", ',');
+    if (i == 7) //2
         return my_str_to_word_array("0.625,1.86", ',');
     return set_position2(i);
     return NULL;

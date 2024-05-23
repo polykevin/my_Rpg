@@ -98,7 +98,7 @@ static void change_sprite(fight_t *fight, game_t *g)
     }
     if (choice >= 3)
         choice = 0.0;
-    choice += g->delta_time * 8;
+    choice += g->delta_time * (8 / (g->player.speed + 1));
 }
 
 void choosing_animation(fight_t *fight, game_t *g)

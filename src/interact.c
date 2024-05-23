@@ -78,6 +78,7 @@ static void end_fight_animation(vec2_double_t *vec, int *idx,
         g->fight.opponent_idx = *idx;
         g->opponent_live = 4;
         *idx = 0;
+        change_level(&g->player, &g->fight);
         sfView_reset(g->camera, (sfFloatRect){0, 0, WIDTH, HEIGHT});
         sfView_setCenter(g->camera, (sfVector2f){MAP_WIDTH * 2,
             MAP_HEIGHT * 2});

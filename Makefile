@@ -33,6 +33,7 @@ SRC    =	src/main.c										\
 			src/game/game_render.c 							\
 			src/map_elements.c								\
 			src/button_menu.c 								\
+			src/fight/stats.c
 
 
 OBJ =   	$(SRC:.c=.o)

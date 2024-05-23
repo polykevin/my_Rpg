@@ -108,7 +108,7 @@ void game_init(game_t *g)
     init_player(g);
     ennemy_init(g);
     g->opponent_live = 4;
-    create_fight(&g->fight);
+    create_fight(&g->fight, &g->player);
     create_menu(&g->menu);
     well(&g->element);
     g->camera = sfView_createFromRect((sfFloatRect){0, 0, WIDTH, HEIGHT});

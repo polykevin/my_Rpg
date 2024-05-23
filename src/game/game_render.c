@@ -76,11 +76,18 @@ static void game_render_fight_ui(game_t *g)
         g->fight.rock.sprite.sprite, NULL);
     sfRenderWindow_drawSprite(g->window,
         g->fight.cisor.sprite.sprite, NULL);
+    if (g->player.attack_xp != 0) {
     sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
-    sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
-    sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
+
+    }
+    if (g->player.defense_xp != 0) {
+    sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
     sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
+    }
+    if (g->player.speed_xp != 0) {
+        sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
+    }
     sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
 }
 
