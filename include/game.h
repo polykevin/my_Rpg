@@ -40,6 +40,22 @@ typedef enum {
     IDLE
 }player_state_t;
 
+typedef struct main_player {
+    int live;
+    int attack;
+    int defense;
+    int speed;
+    int attack_xp;
+    int defense_xp;
+    int speed_xp;
+    int money;
+    sprite_t player_sprite;
+    sprite_t life_sprite;
+    sprite_t coin_sprite;
+    char *money_str;
+    text_t money_text;
+}main_player_t;
+
 typedef struct game {
     sfVideoMode mode;
     sfRenderWindow *window;
@@ -47,7 +63,7 @@ typedef struct game {
     fight_t fight;
     element_t element;
     sfEvent event;
-    sprite_t player;
+    main_player_t player;
     player_state_t player_state;
     sfTexture *player_textures[2];
     sprite_t map;
@@ -59,7 +75,6 @@ typedef struct game {
     sfTime time;
     sfTime last_time;
     double delta_time;
-    int player_live;
     int opponent_live;
 }game_t;
 

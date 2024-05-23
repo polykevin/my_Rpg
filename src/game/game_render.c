@@ -24,12 +24,19 @@ void game_render_map(game_t *g)
 {
     if (g->state == MAP) {
         sfRenderWindow_drawSprite(g->window, g->map.sprite, NULL);
+        sfRenderWindow_drawText(g->window,
+            g->player.money_text.text_obj, NULL);
         for (int i = 0; i < 12; i++) {
             sfRenderWindow_drawSprite(g->window,
                 g->tab_ennemy[i]->sprite, NULL);
         }
-        sfRenderWindow_drawSprite(g->window, g->player.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window,
+            g->player.player_sprite.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window,
+            g->player.life_sprite.sprite, NULL);
         sfRenderWindow_drawSprite(g->window, g->element.well.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window,
+            g->player.coin_sprite.sprite, NULL);
         if (g->interact.draw)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }

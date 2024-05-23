@@ -7,8 +7,6 @@
 #ifndef ELEMENT_H
     #define ELEMENT_H
     #include "sprite.h"
-    #include "game.h"
-    #include "fight.h"
 
 typedef struct element {
     sprite_t well;

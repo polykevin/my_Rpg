@@ -28,6 +28,7 @@ SRC    =	src/main.c										\
 			src/fight/fight.c								\
 			src/fight/fight_animation.c 					\
 			src/fight/update_fight.c 						\
+			src/fight/fight_init.c 							\
 			src/game/game_update.c 							\
 			src/game/game_render.c 							\
 			src/map_elements.c								\

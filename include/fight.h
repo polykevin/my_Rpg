@@ -16,6 +16,14 @@ typedef enum choice {
     CHOOSING
 }choice_t;
 
+typedef enum {
+    DEATH,
+    ONE_HEART,
+    TWO_HEART,
+    THREE_HEART,
+    FOUR_HEART,
+} texture_idx_t;
+
 typedef struct fight {
     sprite_t scene;
     sprite_t player;
@@ -38,8 +46,6 @@ typedef struct fight {
     sprite_t fire2;
     sprite_t defense2;
     sprite_t other2;
-    sprite_t player_bubble;
-    sprite_t opponent_bubble;
     sprite_t opponent_choice_sprite;
     sprite_t player_choice_sprite;
     sprite_t case1;
@@ -47,6 +53,7 @@ typedef struct fight {
     int opponent_idx;
     choice_t player_choice;
     choice_t opponent_choice;
+    sfTexture *live_texture[5];
 } fight_t;
 
 void create_fight(fight_t *fight);

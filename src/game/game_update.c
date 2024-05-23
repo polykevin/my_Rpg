@@ -9,6 +9,7 @@
 #include "player_movement.h"
 #include "interact.h"
 #include "snow_header.h"
+#include "sprite.h"
 
 void game_update_menu(game_t *g)
 {
@@ -42,7 +43,7 @@ void inventory_off(game_t *g, G_menu_t *menu)
             sfRenderWindow_setView(g->window, g->camera);
     }
     if (!player_movement(g)) {
-        sprite_animation(&g->player, g, PLAYER_SPRITE_SIZE, 320);
+        sprite_animation(&g->player.player_sprite, g, PLAYER_SPRITE_SIZE, 320);
     }
     if (is_interact(g, &finished)) {
         sprite_animation(&g->interact, g, 1023, 7777);
@@ -59,6 +60,7 @@ void inventory_off(game_t *g, G_menu_t *menu)
 int game_update_map(game_t *g, G_menu_t *menu, level_t *level)
 {
     if (g->state == MAP) {
+        sprite_animation(&g->player.coin_sprite, g, 20, 160);
         if (menu->on_off == OFF)
             inventory_off(g, menu);
         else

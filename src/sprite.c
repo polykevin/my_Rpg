@@ -31,15 +31,15 @@ void sprite_draw(sprite_t *s, sfRenderWindow *window)
 
 void sprite_animation(sprite_t *s, game_t *g, int offset, int max)
 {
-    if (s->texture_rect.left >= max) {
-        s->texture_rect.left = 0;
-    }
     if (s->accumulator >= s->animation_speed) {
         s->texture_rect.left += offset;
         if (s->texture_rect.left < max) {
             sfSprite_setTextureRect(s->sprite, s->texture_rect);
         }
         s->accumulator = 0;
+    }
+    if (s->texture_rect.left >= max) {
+        s->texture_rect.left = 0;
     }
     s->accumulator += g->delta_time;
 }

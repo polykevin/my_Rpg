@@ -22,6 +22,15 @@ static void enemy_init(sfFloatRect *enemy, game_t *g, int i,
     *enemy_pos = sfSprite_getPosition(g->tab_ennemy[i]->sprite);
 }
 
+static void check_enemies2(vec2_double_t *vec, game_t *g, int i, int *idx)
+{
+    vec->y = 1.005;
+    vec->x = 15.0 * g->delta_time;
+    sfView_rotate(g->camera, vec->x);
+    sfView_zoom(g->camera, vec->y);
+    *idx = i;
+}
+
 static bool check_enemies(game_t *g, sfFloatRect *player,
     vec2_double_t *vec, int *idx)
 {
@@ -32,11 +41,7 @@ static bool check_enemies(game_t *g, sfFloatRect *player,
         enemy_init(&enemy, g, i, &enemy_pos);
         if (sfFloatRect_intersects(player, &enemy, NULL)
             && sfKeyboard_isKeyPressed(sfKeyEnter)) {
-            vec->y = 1.005;
-            vec->x = 15.0 * g->delta_time;
-            sfView_rotate(g->camera, vec->x);
-            sfView_zoom(g->camera, vec->y);
-            *idx = i;
+            check_enemies2(vec, g, i, idx);
         }
         if (sfFloatRect_intersects(player, &enemy, NULL)) {
             g->interact.draw = true;
@@ -79,7 +84,8 @@ static void end_fight_animation(vec2_double_t *vec, int *idx,
 
 bool is_interact(game_t *g, bool *finished)
 {
-    sfFloatRect player = sfSprite_getGlobalBounds(g->player.sprite);
+    sfFloatRect player =
+        sfSprite_getGlobalBounds(g->player.player_sprite.sprite);
     static vec2_double_t vec = {0.0, 1.0};
     static int idx = 0;
 
