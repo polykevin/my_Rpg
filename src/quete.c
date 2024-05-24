@@ -32,10 +32,13 @@
 
 static void set_pos_pnj(quete_t *quete)
 {
-    sfRectangleShape_setSize(quete->rect, (sfVector2f){5, 5});
-    sfRectangleShape_setPosition(quete->rect, (sfVector2f){1.8, 1.5});
-    sfSprite_setPosition(quete->character.sprite, (sfVector2f){2380, 1880});
-    sfSprite_setScale(quete->character.sprite, (sfVector2f){4.8, 4.8});
+    sfRectangleShape_setSize(quete->rect, (sfVector2f){380, 130});
+    sfRectangleShape_setFillColor(quete->rect, sfWhite);
+    sfRectangleShape_setOutlineColor(quete->rect, sfBlack);
+    sfRectangleShape_setOutlineThickness(quete->rect, 5);
+    sfRectangleShape_setPosition(quete->rect, (sfVector2f){2480, 1745});
+    sfSprite_setPosition(quete->character.sprite, (sfVector2f){2380, 1795});
+    sfSprite_setScale(quete->character.sprite, (sfVector2f){6, 6});
     sfSprite_setPosition(quete->check1.sprite, (sfVector2f){2795, 1748});
     sfSprite_setScale(quete->check1.sprite, (sfVector2f){0.05, 0.05});
     sfSprite_setPosition(quete->check2.sprite, (sfVector2f){2813, 1780});
@@ -84,7 +87,7 @@ void quete_text(quete_t *quete)
 void create_pnj(quete_t *quete)
 {
     sprite_init(&quete->character, "resource/player/quete.png"
-        , (sfIntRect){0, 35, 25, 30});
+        , (sfIntRect){5, 0, 20, 30});
     sprite_init(&quete->check1, "resource/map/check.png"
         , (sfIntRect){0, 0, 512, 512});
     sprite_init(&quete->check2, "resource/map/check.png"

@@ -134,5 +134,5 @@ void well(element_t *element)
             (sfIntRect){0, 0, 48, 48});
     sfSprite_setPosition(element->well.sprite, (sfVector2f){MAP_WIDTH * 1.82,
     MAP_HEIGHT * 1.755});
-    sfSprite_setScale(element->well.sprite, (sfVector2f){4, 4}); 
+    sfSprite_setScale(element->well.sprite, (sfVector2f){4, 4});
 }

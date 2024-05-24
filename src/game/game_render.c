@@ -42,11 +42,11 @@ static void game_render_text(game_t *g)
     sfRenderWindow_drawText(g->window, g->quete.quete2, NULL);
     sfRenderWindow_drawText(g->window, g->quete.quete3, NULL);
     sfRenderWindow_drawText(g->window, g->quete.quete4, NULL);
-    sfRenderWindow_drawRectangleShape(g->window, g->quete.rect, NULL);
 }
 
 static void game_render_quete(game_t *g)
 {
+    sfRenderWindow_drawRectangleShape(g->window, g->quete.rect, NULL);
     sfRenderWindow_drawSprite(g->window, g->quete.character.sprite, NULL);
     if (g->player.attack_xp == 3)
         sfRenderWindow_drawSprite(g->window, g->quete.check1.sprite, NULL);
@@ -125,8 +125,8 @@ void game_render_map(game_t *g)
         sfRenderWindow_drawSprite(g->window, g->element.well.sprite, NULL);
         sfRenderWindow_drawSprite(g->window,
             g->player.coin_sprite.sprite, NULL);
-        game_render_text(g);
         game_render_quete(g);
+        game_render_text(g);
         if (g->interact.draw)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }
