@@ -108,6 +108,9 @@ typedef struct quete {
     sfText *quete2;
     sfText *quete3;
     sfText *quete4;
+    sfText *speed_txt;
+    sfText *attack_txt;
+    sfText *defense_txt;
 } quete_t;
 
 typedef struct game {
