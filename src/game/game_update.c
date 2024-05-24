@@ -38,6 +38,7 @@ static void map_handle(game_t *g, bool *finished)
         if (is_interact(g, finished)) {
             sprite_animation(&g->interact, g, 1023, 7777);
         }
+        interact_well(g);
         if (!finished)
             sfRenderWindow_setView(g->window, g->camera);
     }

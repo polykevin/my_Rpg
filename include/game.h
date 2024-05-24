@@ -171,5 +171,6 @@ void select_animation(button_t *button, sfVector2f scale,
 void create_pnj(quete_t *quete);
 void quete_text(quete_t *quete);
 void save_file(main_player_t player);
-char *load_file(main_player_t *player);
+char *load_file(main_player_t *player, fight_t *fight);
+void update_life(sprite_t *life, fight_t *fight, int life_nb);
 #endif

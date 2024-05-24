@@ -5,10 +5,11 @@
 ** main file
 */
 
-#include "snow_header.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "my.h"
+#include "snow_header.h"
 
 int add_struct_2(main_player_t *player, char *token)
 {
@@ -52,7 +53,7 @@ int add_struct(main_player_t *player, char *token)
     return (add_struct_2(player, token));
 }
 
-char *load_data(main_player_t *player, char **file)
+char *load_data(main_player_t *player, fight_t *fight, char **file)
 {
     char *token = NULL;
 
@@ -61,11 +62,18 @@ char *load_data(main_player_t *player, char **file)
         if (add_struct(player, token) == 1)
             return ("corrupt file");
     }
+    player->money_str = my_int_to_str(player->money);
+    sfText_setString(player->money_text.text_obj,
+        player->money_str);
+    update_life(&player->life_sprite, fight, player->live);
+    update_life(&player->life_sprite, fight, player->live);
+    update_life(&fight->life, fight, player->live);
+    update_life(&fight->life2, fight, 4);
     free_array(file);
     return ("Load complete");
 }
 
-char *load_file(main_player_t *player)
+char *load_file(main_player_t *player, fight_t *fight)
 {
     char *temp = open_file("save.txt");
     char **file = NULL;
@@ -81,7 +89,7 @@ char *load_file(main_player_t *player)
         free_array(file);
         return ("corrupt file");
     }
-    return (load_data(player, file));
+    return (load_data(player, fight, file));
 }
 
 void save_file(main_player_t player)

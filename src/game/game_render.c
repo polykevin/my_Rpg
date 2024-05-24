@@ -34,6 +34,8 @@ static void game_render_map2(game_t *g)
         g->player.coin_sprite.sprite, NULL);
     if (g->interact.draw)
         sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
+    if (g->element.draw)
+        sfRenderWindow_drawText(g->window, g->element.text, NULL);
 }
 
 static void game_render_text(game_t *g)
@@ -118,6 +120,7 @@ void game_render_map(game_t *g)
         sfRenderWindow_drawText(g->window,
             g->player.money_text.text_obj, NULL);
         game_render_map_enemies(g);
+        game_render_quete(g);
         sfRenderWindow_drawSprite(g->window,
             g->player.player_sprite.sprite, NULL);
         sfRenderWindow_drawSprite(g->window,
@@ -125,8 +128,8 @@ void game_render_map(game_t *g)
         sfRenderWindow_drawSprite(g->window, g->element.well.sprite, NULL);
         sfRenderWindow_drawSprite(g->window,
             g->player.coin_sprite.sprite, NULL);
-        game_render_quete(g);
         game_render_text(g);
+        game_render_map2(g);
         if (g->interact.draw)
             sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
     }

@@ -8,6 +8,4 @@
     #define FIGHT_H
     #include "button.h"
     #include "sprite.h"
-
-
 #endif // !FIGHT_H

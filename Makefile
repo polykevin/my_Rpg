@@ -42,7 +42,8 @@ SRC    =	src/main.c										\
 			src/fight/stats.c 								\
 			src/fight/win.c									\
 			src/collisions.c 								\
-			src/quete.c
+			src/quete.c										\
+			src/interact_well.c 							\
 
 
 OBJ =   	$(SRC:.c=.o)

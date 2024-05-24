@@ -118,6 +118,15 @@ static void init_player(game_t *g)
     init_player_asset(g);
 }
 
+static void init2(game_t *g)
+{
+    init_sprite(g);
+    init_player(g);
+    ennemy_init(g);
+    quete_text(&g->quete);
+    create_pnj(&g->quete);
+}
+
 void game_init(game_t *g)
 {
     g->mode.width = WIDTH;
@@ -127,11 +136,7 @@ void game_init(game_t *g)
     sfResize | sfClose, NULL);
     g->state = MENU;
     sfRenderWindow_setFramerateLimit(g->window, 60);
-    init_sprite(g);
-    init_player(g);
-    ennemy_init(g);
-    quete_text(&g->quete);
-    create_pnj(&g->quete);
+    init2(g);
     g->opponent_live = 4;
     create_fight(&g->fight, &g->player);
     create_menu(&g->menu);

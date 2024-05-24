@@ -64,7 +64,7 @@ static void update_life2(sprite_t *life, fight_t *fight, int life_nb)
     }
 }
 
-static void update_life(sprite_t *life, fight_t *fight, int life_nb)
+void update_life(sprite_t *life, fight_t *fight, int life_nb)
 {
     if (life_nb == 0) {
         sfSprite_setTexture(life->sprite,

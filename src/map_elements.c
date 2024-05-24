@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** fight
+** RPG
 ** File description:
-** fight
+** map_elements.c
 */
 #include <SFML/Graphics.h>
 #include <SFML/Graphics/CircleShape.h>
@@ -132,7 +132,17 @@ void well(element_t *element)
 {
     sprite_init(&element->well, "resource/map/well.png",
             (sfIntRect){0, 0, 48, 48});
+    element->font =
+        sfFont_createFromFile("resource/font/font.ttf");
+    element->text = sfText_create();
+    sfText_setString(element->text, "10 gold to heal");
+    sfText_setFont(element->text, element->font);
+    sfText_setCharacterSize(element->text, 20);
+    sfText_setColor(element->text, sfWhite);
+    sfText_setOutlineColor(element->text, sfBlack);
+    sfText_setOutlineThickness(element->text, 3);
     sfSprite_setPosition(element->well.sprite, (sfVector2f){MAP_WIDTH * 1.82,
     MAP_HEIGHT * 1.755});
     sfSprite_setScale(element->well.sprite, (sfVector2f){4, 4});
+    element->draw = false;
 }
