@@ -9,7 +9,7 @@
 
 static void malloc_struct(G_menu_t *menu)
 {
-    menu->back = malloc(sizeof(Background_t) * 5);
+    menu->back = malloc(sizeof(Background_t) * 6);
     menu->words = malloc(sizeof(words_t) * 7);
 }
 
@@ -26,7 +26,7 @@ static void inzialize_text_2(G_menu_t *menu)
     TEXT[6].text = sfText_create();
     sfText_setString(TEXT[6].text, "Inventory");
     sfText_setFont(TEXT[6].text, menu->font);
-    sfText_setCharacterSize(TEXT[6].text, 35);
+    sfText_setCharacterSize(TEXT[6].text, 27);
 }
 
 static void inzialize_text(G_menu_t *menu)
@@ -49,6 +49,15 @@ static void inzialize_text(G_menu_t *menu)
     sfText_setFont(TEXT[3].text, menu->font);
     sfText_setCharacterSize(TEXT[3].text, 30);
     inzialize_text_2(menu);
+}
+
+static void inizialize_bag(G_menu_t *menu)
+{
+    BACK[5].back = sfRectangleShape_create();
+    sfRectangleShape_setSize(BACK[5].back,
+    (sfVector2f){WIDTH * 0.09, HEIGHT * 0.04});
+    sfRectangleShape_setFillColor(BACK[5].back,
+    sfColor_fromRGBA(200, 200, 200, 200));
 }
 
 static void inizialize_inventory(G_menu_t *menu)
@@ -103,5 +112,6 @@ void inizialize_game_menu(G_menu_t *menu)
     malloc_struct(menu);
     inizialize_background(menu);
     inizialize_inventory(menu);
+    inizialize_bag(menu);
     inzialize_text(menu);
 }

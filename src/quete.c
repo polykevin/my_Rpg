@@ -55,6 +55,26 @@ static void set_pos_pnj(quete_t *quete)
     sfSprite_setScale(quete->check4.sprite, (sfVector2f){0.05, 0.05});
 }
 
+static void set_flag(quete_t *quete)
+{
+    sfText_setPosition(quete->attack_txt, (sfVector2f){1785, 2092});
+    sfText_setCharacterSize(quete->attack_txt, 50);
+    sfText_setPosition(quete->defense_txt, (sfVector2f){2650, 2092});
+    sfText_setCharacterSize(quete->defense_txt, 50);
+    sfText_setPosition(quete->speed_txt, (sfVector2f){2420, 2250});
+    sfText_setCharacterSize(quete->speed_txt, 50);
+    sfText_setOutlineColor(quete->speed_txt, sfBlack);
+    sfText_setOutlineThickness(quete->speed_txt, 5);
+    sfText_setOutlineColor(quete->attack_txt, sfBlack);
+    sfText_setOutlineThickness(quete->attack_txt, 5);
+    sfText_setOutlineColor(quete->defense_txt, sfBlack);
+    sfText_setOutlineThickness(quete->defense_txt, 5);
+    sfText_setColor(quete->quete1, sfBlack);
+    sfText_setColor(quete->quete2, sfBlack);
+    sfText_setColor(quete->quete3, sfBlack);
+    sfText_setColor(quete->quete4, sfBlack);
+}
+
 static void set_text(quete_t *quete)
 {
     sfText_setPosition(quete->quete1, (sfVector2f){2500, 1750});
@@ -65,10 +85,20 @@ static void set_text(quete_t *quete)
     sfText_setCharacterSize(quete->quete3, 20);
     sfText_setPosition(quete->quete4, (sfVector2f){2500, 1840});
     sfText_setCharacterSize(quete->quete4, 20);
-    sfText_setColor(quete->quete1, sfBlack);
-    sfText_setColor(quete->quete2, sfBlack);
-    sfText_setColor(quete->quete3, sfBlack);
-    sfText_setColor(quete->quete4, sfBlack);
+    set_flag(quete);
+}
+
+static void create_flag(quete_t *quete, sfFont *font)
+{
+    quete->speed_txt = sfText_create();
+    sfText_setFont(quete->speed_txt, font);
+    sfText_setString(quete->speed_txt, "S\np\ne\ne\nd");
+    quete->attack_txt = sfText_create();
+    sfText_setFont(quete->attack_txt, font);
+    sfText_setString(quete->attack_txt, "Attack");
+    quete->defense_txt = sfText_create();
+    sfText_setFont(quete->defense_txt, font);
+    sfText_setString(quete->defense_txt, "Defense");
 }
 
 void quete_text(quete_t *quete)
@@ -87,6 +117,7 @@ void quete_text(quete_t *quete)
     quete->quete4 = sfText_create();
     sfText_setFont(quete->quete4, font);
     sfText_setString(quete->quete4, "Fight the boss");
+    create_flag(quete, font);
     set_text(quete);
 }
 

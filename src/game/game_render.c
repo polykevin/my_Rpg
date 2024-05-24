@@ -44,6 +44,9 @@ static void game_render_text(game_t *g)
     sfRenderWindow_drawText(g->window, g->quete.quete2, NULL);
     sfRenderWindow_drawText(g->window, g->quete.quete3, NULL);
     sfRenderWindow_drawText(g->window, g->quete.quete4, NULL);
+    sfRenderWindow_drawText(g->window, g->quete.speed_txt, NULL);
+    sfRenderWindow_drawText(g->window, g->quete.attack_txt, NULL);
+    sfRenderWindow_drawText(g->window, g->quete.defense_txt, NULL);
 }
 
 static void game_render_quete(game_t *g)
