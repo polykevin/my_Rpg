@@ -11,7 +11,7 @@
 #include "snow_header.h"
 #include "sprite.h"
 
-void game_update_menu(game_t *g)
+int game_update_menu(game_t *g)
 {
     if (g->state == MENU)
         update_menu(&g->menu);
@@ -22,6 +22,11 @@ void game_update_menu(game_t *g)
             MAP_HEIGHT * 2});
         sfRenderWindow_setView(g->window, g->camera);
     }
+    if (sfMouse_isButtonPressed(sfMouseLeft) &&
+        g->menu.buttons[1]->state == CLICKED && g->state == MENU) {
+        return FAIL;
+    }
+    return 0;
 }
 
 static void map_handle(game_t *g, bool *finished)

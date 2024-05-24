@@ -52,7 +52,7 @@ void idle_animation(level_t *level, game_t *g, int offset, int max);
 void map_movement(level_t *level, game_t *game, int direction);
 int check_contact(sfVector2f pos_1, sfRectangleShape *box_2);
 float time_as_seconds(sfClock *clock);
-void start_game_menu(game_t *game, G_menu_t *menu); 
+void start_game_menu(game_t *game, G_menu_t *menu);
 void default_game(level_t *level, G_menu_t *menu);
 void print_inventory(G_menu_t *menu, level_t *level, game_t *game, int on);
 void destroy_inventory(Inventory_t *inventory);

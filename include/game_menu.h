@@ -36,4 +36,3 @@ typedef struct G_menu_s {
 } G_menu_t;
 
 #endif /* G_MENU_H_ */
-

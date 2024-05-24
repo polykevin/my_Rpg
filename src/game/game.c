@@ -68,7 +68,8 @@ void game_handle_time(game_t *g)
 static int update(game_t *g, G_menu_t *menu, level_t *level)
 {
     game_handle_time(g);
-    game_update_menu(g);
+    if (game_update_menu(g) == FAIL)
+        return FAIL;
     if (game_update_map(g, menu, level) == FAIL)
         return FAIL;
     game_update_fight(g);
