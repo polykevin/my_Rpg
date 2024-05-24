@@ -28,6 +28,11 @@ void display_game_menu(game_t *game, G_menu_t *menu, level_t *level)
             sfRenderWindow_drawText(WINDOW, TEXT[6].text, NULL);
             display_inventory(level->inventory, game);
         }
+        if (menu->stat == ON) {
+            sfRenderWindow_drawRectangleShape(WINDOW, BACK[3].back, NULL);
+            sfRenderWindow_drawRectangleShape(WINDOW, BACK[4].back, NULL);
+            sfRenderWindow_drawText(WINDOW, TEXT[7].text, NULL);
+        }
         for (int i = 0; i != 6; i++)
             sfRenderWindow_drawText(WINDOW, TEXT[i].text, NULL);
     }

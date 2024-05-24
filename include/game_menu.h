@@ -33,6 +33,7 @@ typedef struct G_menu_s {
     int on_off;
     int bag;
     int bag_nb;
+    int stat;
 } G_menu_t;
 
 #endif /* G_MENU_H_ */

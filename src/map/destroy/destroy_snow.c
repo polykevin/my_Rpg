@@ -21,7 +21,7 @@ void destroy_game_menu(G_menu_t *menu)
     for (int i = 0; i != 6; i++)
         sfRectangleShape_destroy(BACK[i].back);
     sfFont_destroy(menu->font);
-    for (int i = 0; i != 6; i++)
+    for (int i = 0; i != 7; i++)
         sfText_destroy(TEXT[i].text);
     free(BACK);
     free(TEXT);

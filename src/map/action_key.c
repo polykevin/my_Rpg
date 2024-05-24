@@ -25,16 +25,21 @@ static void inventory_off(level_t *level, game_t *g, G_menu_t *menu)
     }
 }
 
-static void effect(level_t *level, int id)
+static void effect(game_t *game, int id)
 {
-    if (id == 1) {
-        level->player.hp = level->player.hp_max;
-    }
+    if (id == 1)
+        game->player.live = 4;
+    if (id == 2)
+        game->player.attack++;
+    if (id == 3)
+        game->player.defense++;
+    if (id == 4)
+        game->player.speed++;
 }
 
 static int more_down(Inventory_t *inventory, int nb)
 {
-    if (inventory[0].next == NULL) {
+    if (inventory[0].next == NULL || nb == 0) {
         if (nb != 0)
             return FAIL;
         return SUCCESS;
@@ -65,12 +70,12 @@ static void inventory_up(G_menu_t *menu)
 }
 
 static int object_effect(Inventory_t *inventory, int nb,
-    level_t *level, Inventory_t *last)
+    game_t *game, Inventory_t *last)
 {
     if (nb != 1)
-        return (object_effect(inventory[0].next, nb - 1, level, inventory));
+        return (object_effect(inventory[0].next, nb - 1, game, inventory));
     inventory[0].nb = inventory[0].nb - 1;
-    effect(level, inventory->id);
+    effect(game, inventory->id);
     if (inventory[0].nb == 0) {
         sfText_destroy(INV[0].name);
         sfText_destroy(INV[0].number);
@@ -81,15 +86,18 @@ static int object_effect(Inventory_t *inventory, int nb,
     return 0;
 }
 
-static void use_object(G_menu_t *menu, level_t *level, game_t *game)
+static void use_object(G_menu_t *menu, level_t *level, game_t *g)
 {
     if (menu->bag_nb == 0)
         return;
     if (object_effect(level->inventory[0].next, menu->bag_nb,
-    level, level->inventory) == FAIL)
+    g, level->inventory) == FAIL)
         inventory_up(menu);
     destroy_inventory(level->inventory);
-    print_inventory(menu, level, game, FAIL);
+    print_inventory(menu, level, g, FAIL);
+    update_life(&g->player.life_sprite, &g->fight, g->player.live);
+    update_life(&g->fight.life, &g->fight, g->player.live);
+    update_life(&g->fight.life2, &g->fight, g->opponent_live);
     wait_x_sec(0.3);
 }
 
@@ -97,6 +105,7 @@ static int inventory(G_menu_t *menu, level_t *level, game_t *game)
 {
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
         menu->bag = OFF;
+        menu->bag_nb = 0;
         destroy_inventory(level->inventory);
         wait_x_sec(0.3);
     }
@@ -106,11 +115,20 @@ static int inventory(G_menu_t *menu, level_t *level, game_t *game)
     }
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyDown)) {
         inventory_down(menu, level);
-        wait_x_sec(0.05);
+        wait_x_sec(0.2);
     }
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyUp)) {
         inventory_up(menu);
-        wait_x_sec(0.05);
+        wait_x_sec(0.2);
+    }
+    return 0;
+}
+
+static int stat(G_menu_t *menu)
+{
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
+        sfText_destroy(TEXT[7].text);
+        menu->stat = OFF;
     }
     return 0;
 }
@@ -119,6 +137,8 @@ int inventory_on(G_menu_t *menu, level_t *level, game_t *game)
 {
     if (menu->bag == ON)
         return (inventory(menu, level, game));
+    if (menu->stat == ON)
+        return (stat(menu));
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEscape)) {
         menu->on_off = OFF;
     }
@@ -132,17 +152,5 @@ int inventory_on(G_menu_t *menu, level_t *level, game_t *game)
     }
     if (sfTrue == sfKeyboard_isKeyPressed(sfKeyEnter))
         return (menu_enter(menu, level, game));
-    return (0);
-}
-
-int run_action(level_t *level, game_t *game, G_menu_t *menu)
-{
-    game_handle_time(game);
-    if (game->event.type == sfEvtClosed)
-        sfRenderWindow_close(game->window);
-    if (menu->on_off == OFF)
-        inventory_off(level, game, menu);
-    else
-        return (inventory_on(menu, level, game));
     return (0);
 }

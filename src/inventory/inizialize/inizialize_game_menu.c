@@ -10,7 +10,7 @@
 static void malloc_struct(G_menu_t *menu)
 {
     menu->back = malloc(sizeof(Background_t) * 6);
-    menu->words = malloc(sizeof(words_t) * 7);
+    menu->words = malloc(sizeof(words_t) * 8);
 }
 
 static void inzialize_text_2(G_menu_t *menu)

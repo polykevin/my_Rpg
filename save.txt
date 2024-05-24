@@ -1,0 +1,8 @@
+Live: 0
+Attack: 1
+Defense: 0
+Speed: 1
+Attack XP: 0
+Defense XP: 0
+Speed XP: 0
+Money: 0

@@ -13,11 +13,11 @@
     #define S_SET level->settings
 
 static const char *const_inventory[] = {
-    "Potion",
+    "Amulet",
     "Potion L",
-    "Potion XL",
-    "Potion XXL",
-    "Mana Potion",
+    "Potion A",
+    "Potion D",
+    "Potion S",
     0
 };
 
@@ -45,11 +45,6 @@ typedef struct S_PLAYER {
     sfSprite *sprite;
     sfIntRect texture_rect;
     double accumulator;
-    int exp;
-    int max_exp;
-    int hp;
-    int hp_max;
-    int gold;
 } player_t;
 
 typedef struct REC_S {
