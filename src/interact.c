@@ -10,6 +10,8 @@
 #include <SFML/Graphics/View.h>
 #include <SFML/System/Vector2.h>
 #include <SFML/Window/Keyboard.h>
+#include <stdlib.h>
+#include <time.h>
 #include "interact.h"
 #include "game.h"
 #include "sprite.h"
@@ -69,6 +71,7 @@ static void start_fight_animation(vec2_double_t *vec,
 static void end_fight_animation(vec2_double_t *vec, int *idx,
     bool *finished, game_t *g)
 {
+    srand(time(NULL));
     if (vec->x > 10.0) {
         g->state = FIGHT;
         sfRenderWindow_setView(g->window,
@@ -77,6 +80,8 @@ static void end_fight_animation(vec2_double_t *vec, int *idx,
         vec->x = 0.0;
         vec->y = 1.0;
         g->fight.opponent_idx = *idx;
+        g->opponent_attack = rand() % g->player.attack;
+        g->opponent_defense = rand() % (g->player.defense + 1);
         g->opponent_live = 4;
         *idx = 0;
         sfView_reset(g->camera, (sfFloatRect){0, 0, WIDTH, HEIGHT});
