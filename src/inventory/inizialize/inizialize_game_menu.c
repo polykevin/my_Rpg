@@ -37,7 +37,7 @@ static void inzialize_text(G_menu_t *menu)
     sfText_setFont(TEXT[0].text, menu->font);
     sfText_setCharacterSize(TEXT[0].text, 30);
     TEXT[1].text = sfText_create();
-    sfText_setString(TEXT[1].text, "Equipment");
+    sfText_setString(TEXT[1].text, "Stats");
     sfText_setFont(TEXT[1].text, menu->font);
     sfText_setCharacterSize(TEXT[1].text, 30);
     TEXT[2].text = sfText_create();
