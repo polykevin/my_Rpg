@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "game.h": "c",
-        "stdlib.h": "c",
-        "renderwindow.h": "c",
-        "map_elements.h": "c",
-        "fight.h": "c"
-    }
-}

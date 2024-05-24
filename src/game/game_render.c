@@ -102,8 +102,8 @@ static void game_render_fight_ui(game_t *g)
     }
     if (g->player.speed_xp != 0) {
         sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
     }
-    sfRenderWindow_drawSprite(g->window, g->fight.other2.sprite, NULL);
 }
 
 void game_render_menu(game_t *g)

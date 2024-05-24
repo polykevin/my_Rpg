@@ -74,11 +74,11 @@ static char **set_position(int i)
 static char *set_boss(int i)
 {
     if (i == 9)
-        return "resource/boss1.png";
+        return "resource/fight/boss1.png";
     if (i == 10)
-        return "resource/boss2.png";
+        return "resource/fight/boss2.png";
     if (i == 11)
-        return "resource/boss3.png";
+        return "resource/fight/boss3.png";
 }
 
 void ennemy_init_boss(game_t *g, sprite_t *ennemy, int i)

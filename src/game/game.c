@@ -57,6 +57,16 @@ static void poll_events(game_t *g)
     }
 }
 
+void set_music(game_t *g)
+{
+    sfMusic *music;
+
+    music = sfMusic_createFromFile("resource/music/music.wav");
+    sfMusic_setVolume(music, 30);
+    sfMusic_setLoop(music, sfTrue);
+    sfMusic_play(music);
+}
+
 void game_handle_time(game_t *g)
 {
     g->last_time = g->time;
@@ -92,6 +102,7 @@ void game_loop(game_t *g)
 
     inizialize_game_menu(&menu);
     default_game(&level, &menu);
+    set_music(g);
     while (sfRenderWindow_isOpen(g->window) && exit != FAIL) {
         poll_events(g);
         exit = update(g, &menu, &level);
