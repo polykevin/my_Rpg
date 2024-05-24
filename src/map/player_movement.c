@@ -4,6 +4,7 @@
 ** File description:
 ** player movement with arrows
 */
+#include <SFML/Graphics/Image.h>
 #include <SFML/Graphics/Rect.h>
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Text.h>
@@ -31,32 +32,80 @@ static void change_texture(int y, player_state_t state, game_t *g)
     g->player_state = state;
 }
 
-static void go_up(game_t *g)
+static void move_up(game_t *g)
 {
+    sfColor pixel;
+    sfVector2f player_pos;
+
     change_texture(240, UP, g);
     sfSprite_move(g->player.player_sprite.sprite,
         (sfVector2f){0, -PLAYER_SPEED});
+    player_pos = sfSprite_getPosition(g->player.player_sprite.sprite);
+    pixel = sfImage_getPixel(g->map_collision,
+        player_pos.x / 4 + 40,
+        player_pos.y / 4 + 40);
+    if (pixel.r == 255 && pixel.g == 255 && pixel.b == 255) {
+        sfSprite_setPosition(g->player.player_sprite.sprite,
+            (sfVector2f){player_pos.x, player_pos.y + PLAYER_SPEED});
+    }
+    entity_collision(g, UP);
 }
 
-static void go_down(game_t *g)
+static void move_down(game_t *g)
 {
+    sfColor pixel;
+    sfVector2f player_pos;
+
     change_texture(160, DOWN, g);
     sfSprite_move(g->player.player_sprite.sprite,
         (sfVector2f){0, PLAYER_SPEED});
+    player_pos = sfSprite_getPosition(g->player.player_sprite.sprite);
+    pixel = sfImage_getPixel(g->map_collision,
+        player_pos.x / 4 + 40,
+        player_pos.y / 4 + 40);
+    if (pixel.r == 255 && pixel.g == 255 && pixel.b == 255) {
+        sfSprite_setPosition(g->player.player_sprite.sprite,
+            (sfVector2f){player_pos.x, player_pos.y - PLAYER_SPEED});
+    }
+    entity_collision(g, DOWN);
 }
 
-static void go_right(game_t *g)
+static void move_right(game_t *g)
 {
+    sfColor pixel;
+    sfVector2f player_pos;
+
     change_texture(0, RIGHT, g);
     sfSprite_move(g->player.player_sprite.sprite,
         (sfVector2f){PLAYER_SPEED, 0});
+    player_pos = sfSprite_getPosition(g->player.player_sprite.sprite);
+    pixel = sfImage_getPixel(g->map_collision,
+        player_pos.x / 4 + 40,
+        player_pos.y / 4 + 40);
+    if (pixel.r == 255 && pixel.g == 255 && pixel.b == 255) {
+        sfSprite_setPosition(g->player.player_sprite.sprite,
+            (sfVector2f){player_pos.x - PLAYER_SPEED, player_pos.y});
+    }
+    entity_collision(g, RIGHT);
 }
 
-static void go_left(game_t *g)
+static void move_left(game_t *g)
 {
+    sfColor pixel;
+    sfVector2f player_pos;
+
     change_texture(80, LEFT, g);
     sfSprite_move(g->player.player_sprite.sprite,
         (sfVector2f){-PLAYER_SPEED, 0});
+    player_pos = sfSprite_getPosition(g->player.player_sprite.sprite);
+    pixel = sfImage_getPixel(g->map_collision,
+        player_pos.x / 4 + 40,
+        player_pos.y / 4 + 40);
+    if (pixel.r == 255 && pixel.g == 255 && pixel.b == 255) {
+        sfSprite_setPosition(g->player.player_sprite.sprite,
+            (sfVector2f){player_pos.x + PLAYER_SPEED, player_pos.y});
+    }
+    entity_collision(g, LEFT);
 }
 
 static sfIntRect idle_direction(game_t *g)
@@ -96,19 +145,19 @@ static bool handle_arrow(game_t *g)
     bool moved = false;
 
     if (sfKeyboard_isKeyPressed(sfKeyUp)) {
-        go_up(g);
+        move_up(g);
         moved = true;
     }
     if (sfKeyboard_isKeyPressed(sfKeyDown)) {
-        go_down(g);
+        move_down(g);
         moved = true;
     }
     if (sfKeyboard_isKeyPressed(sfKeyRight)) {
-        go_right(g);
+        move_right(g);
         moved = true;
     }
     if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
-        go_left(g);
+        move_left(g);
         moved = true;
     }
     return moved;

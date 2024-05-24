@@ -20,6 +20,22 @@ static void game_render_map_enemies(game_t *g)
     }
 }
 
+static void game_render_map2(game_t *g)
+{
+    sfRenderWindow_drawSprite(g->window,
+        g->gate.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->left_light.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->right_light.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->player.life_sprite.sprite, NULL);
+    sfRenderWindow_drawSprite(g->window,
+        g->player.coin_sprite.sprite, NULL);
+    if (g->interact.draw)
+        sfRenderWindow_drawSprite(g->window, g->interact.sprite, NULL);
+}
+
 static void game_render_text(game_t *g)
 {
     sfRenderWindow_drawText(g->window, g->quete.quete1, NULL);
@@ -72,12 +88,12 @@ static void game_render_fight_ui(game_t *g)
     sfRenderWindow_drawSprite(g->window,
         g->fight.cisor.sprite.sprite, NULL);
     if (g->player.attack_xp != 0) {
-    sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
-    sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.fire.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.fire2.sprite, NULL);
     }
     if (g->player.defense_xp != 0) {
-    sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
-    sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.defense.sprite, NULL);
+        sfRenderWindow_drawSprite(g->window, g->fight.defense2.sprite, NULL);
     }
     if (g->player.speed_xp != 0) {
         sfRenderWindow_drawSprite(g->window, g->fight.other.sprite, NULL);

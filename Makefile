@@ -35,10 +35,13 @@ SRC    =	src/main.c										\
 			src/fight/update_fight.c 						\
 			src/fight/fight_init.c 							\
 			src/game/game_update.c 							\
+			src/game/game_init.c 							\
 			src/game/game_render.c 							\
 			src/map_elements.c								\
 			src/button_menu.c 								\
-			src/fight/stats.c	\
+			src/fight/stats.c 								\
+			src/fight/win.c									\
+			src/collisions.c 								\
 			src/quete.c
 
 

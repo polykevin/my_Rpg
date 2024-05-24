@@ -4,7 +4,7 @@
 ** File description:
 ** main file
 */
-
+#include "my.h"
 #include "snow_header.h"
 
 char *inv_atoi(int num)
@@ -16,9 +16,9 @@ char *inv_atoi(int num)
     return str;
 }
 
-void create_text(G_menu_t *menu, Inventory_t *inventory)
+static void create_text(G_menu_t *menu, Inventory_t *inventory)
 {
-    char *num = inv_atoi(INV[0].nb);
+    char *num = my_int_to_str(INV[0].nb);
 
     INV[0].name = sfText_create();
     sfText_setString(INV[0].name, const_inventory[INV[0].id]);
@@ -33,7 +33,7 @@ void create_text(G_menu_t *menu, Inventory_t *inventory)
         return (create_text(menu, INV[0].next));
 }
 
-void pos_text(Inventory_t *inventory, sfVector2f c_pos)
+static void pos_text(Inventory_t *inventory, sfVector2f c_pos)
 {
     sfText_setPosition(INV[0].name, c_pos);
     c_pos.x = c_pos.x + 200;

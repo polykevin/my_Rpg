@@ -131,6 +131,12 @@ typedef struct game {
     sfTime last_time;
     double delta_time;
     int opponent_live;
+    int opponent_attack;
+    int opponent_defense;
+    sfImage *map_collision;
+    sprite_t gate;
+    sprite_t left_light;
+    sprite_t right_light;
 }game_t;
 
 

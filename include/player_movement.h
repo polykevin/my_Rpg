@@ -12,5 +12,6 @@
     #include "game.h"
 
 bool player_movement(game_t *g);
+void entity_collision(game_t *g, player_state_t state);
 
 #endif

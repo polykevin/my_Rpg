@@ -63,9 +63,31 @@ void inventory_off(game_t *g, G_menu_t *menu)
     }
 }
 
+static void reset_enemy(game_t *g, int x, int y)
+{
+    bool ok = false;
+
+    for (int i = x; i < y; i++) {
+        if (g->tab_ennemy[i]->dead)
+            ok = true;
+        else
+            ok = false;
+    }
+    if (ok) {
+        for (int i = x; i < y; i++) {
+            g->tab_ennemy[i]->dead = false;
+        }
+        sfSprite_setPosition(g->player.player_sprite.sprite,
+            (sfVector2f){MAP_WIDTH * 1.87, MAP_HEIGHT * 1.75});
+    }
+}
+
 int game_update_map(game_t *g, G_menu_t *menu, level_t *level)
 {
     if (g->state == MAP) {
+        reset_enemy(g, 0, 3);
+        reset_enemy(g, 3, 6);
+        reset_enemy(g, 6, 9);
         sprite_animation(&g->player.coin_sprite, g, 20, 160);
         if (menu->on_off == OFF)
             inventory_off(g, menu);

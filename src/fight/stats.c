@@ -52,9 +52,12 @@ static void change_level_speed(main_player_t *player, fight_t *fight)
     if (player->speed_xp == 2) {
         update_stats(&fight->other, 60, 80, 20);
     }
+    if (player->speed_xp == 3)
+        update_stats(&fight->other, 60, 150, 20);
     if (player->speed_xp > 3) {
         update_stats(&fight->other, 60, 0, 20);
         player->speed++;
+        player->speed_xp = 0;
     }
 }
 
@@ -71,9 +74,8 @@ static void change_level_attack(main_player_t *player, fight_t *fight)
     if (player->attack_xp > 3) {
         update_stats(&fight->fire, 0, 0, 40);
         player->attack++;
+        player->attack_xp = 0;
     }
-    if (player->speed_xp == 3)
-        update_stats(&fight->other, 60, 150, 20);
 }
 
 static void change_level_defense(main_player_t *player, fight_t *fight)
@@ -89,6 +91,7 @@ static void change_level_defense(main_player_t *player, fight_t *fight)
     if (player->defense_xp > 3) {
         update_stats(&fight->defense, 40, 0, 20);
         player->defense++;
+        player->defense_xp = 0;
     }
 }
 
