@@ -108,6 +108,8 @@ void game_init(game_t *g)
     init_player(g);
     ennemy_init(g);
     g->opponent_live = 4;
+    quete_text(&g->quete);
+    create_pnj(&g->quete);
     create_fight(&g->fight, &g->player);
     create_menu(&g->menu);
     well(&g->element);

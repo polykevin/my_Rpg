@@ -94,11 +94,28 @@ typedef struct fight {
     sfTexture *live_texture[5];
 } fight_t;
 
+typedef struct quete {
+    sprite_t character;
+    sfRectangleShape *rect;
+    sprite_t check1;
+    sprite_t check2;
+    sprite_t check3;
+    sprite_t check4;
+    sprite_t speed;
+    sprite_t attack;
+    sprite_t defense;
+    sfText *quete1;
+    sfText *quete2;
+    sfText *quete3;
+    sfText *quete4;
+} quete_t;
+
 typedef struct game {
     sfVideoMode mode;
     sfRenderWindow *window;
     menu_t menu;
     fight_t fight;
+    quete_t quete;
     element_t element;
     sfEvent event;
     main_player_t player;
@@ -115,6 +132,7 @@ typedef struct game {
     double delta_time;
     int opponent_live;
 }game_t;
+
 
 typedef enum {
     DEATH,
@@ -143,4 +161,7 @@ void update_fight(fight_t *fight, game_t *g);
 void choosing_animation(fight_t *fight, game_t *g);
 void select_animation(button_t *button, sfVector2f scale,
     fight_t *fight, choice_t choice);
+
+void create_pnj(quete_t *quete);
+void quete_text(quete_t *quete);
 #endif

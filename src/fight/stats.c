@@ -38,28 +38,12 @@ static void set_pos_stats(fight_t *fight)
     sfSprite_setScale(fight->other2.sprite, (sfVector2f){2, 2});
 }
 
-void create_stats(fight_t *fight)
-{
-    sprite_init(&fight->fire, "resource/fight/ui.png",
-        (sfIntRect){230, 0, 0, 40});
-    sprite_init(&fight->defense, "resource/fight/ui.png",
-        (sfIntRect){230, 40, 40, 20});
-    sprite_init(&fight->other, "resource/fight/ui.png",
-        (sfIntRect){230, 60, 150, 20});
-    sprite_init(&fight->fire2, "resource/fight/ui.png",
-        (sfIntRect){230, 0, 150, 40});
-    sprite_init(&fight->defense2, "resource/fight/ui.png",
-        (sfIntRect){230, 40, 150, 20});
-    sprite_init(&fight->other2, "resource/fight/ui.png",
-        (sfIntRect){230, 60, 150, 20});
-}
-
-void update_stats(sprite_t *element, int y, int x, int y2)
+static void update_stats(sprite_t *element, int y, int x, int y2)
 {
     sfSprite_setTextureRect(element->sprite, (sfIntRect){230, y, x, y2});
 }
 
-void change_level_speed(main_player_t *player, fight_t *fight)
+static void change_level_speed(main_player_t *player, fight_t *fight)
 {
     if (player->speed_xp == 0)
         update_stats(&fight->other, 60, 0, 20);
@@ -74,7 +58,7 @@ void change_level_speed(main_player_t *player, fight_t *fight)
     }
 }
 
-void change_level_attack(main_player_t *player, fight_t *fight)
+static void change_level_attack(main_player_t *player, fight_t *fight)
 {
     if (player->attack_xp == 0)
         update_stats(&fight->fire, 0, 0, 40);
@@ -92,7 +76,7 @@ void change_level_attack(main_player_t *player, fight_t *fight)
         update_stats(&fight->other, 60, 150, 20);
 }
 
-void change_level_defense(main_player_t *player, fight_t *fight)
+static void change_level_defense(main_player_t *player, fight_t *fight)
 {
     if (player->defense_xp == 0)
         update_stats(&fight->defense, 40, 0, 20);
@@ -106,6 +90,22 @@ void change_level_defense(main_player_t *player, fight_t *fight)
         update_stats(&fight->defense, 40, 0, 20);
         player->defense++;
     }
+}
+
+void create_stats(fight_t *fight)
+{
+    sprite_init(&fight->fire, "resource/fight/ui.png",
+        (sfIntRect){230, 0, 0, 40});
+    sprite_init(&fight->defense, "resource/fight/ui.png",
+        (sfIntRect){230, 40, 40, 20});
+    sprite_init(&fight->other, "resource/fight/ui.png",
+        (sfIntRect){230, 60, 150, 20});
+    sprite_init(&fight->fire2, "resource/fight/ui.png",
+        (sfIntRect){230, 0, 150, 40});
+    sprite_init(&fight->defense2, "resource/fight/ui.png",
+        (sfIntRect){230, 40, 150, 20});
+    sprite_init(&fight->other2, "resource/fight/ui.png",
+        (sfIntRect){230, 60, 150, 20});
 }
 
 void change_level(main_player_t *player, fight_t *fight)

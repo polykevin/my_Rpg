@@ -71,7 +71,7 @@ static char **set_position(int i)
     return NULL;
 }
 
-char *set_boss(int i)
+static char *set_boss(int i)
 {
     if (i == 9)
         return "resource/boss1.png";
@@ -132,7 +132,7 @@ void well(element_t *element)
 {
     sprite_init(&element->well, "resource/map/well.png",
             (sfIntRect){0, 0, 48, 48});
-    sfSprite_setPosition(element->well.sprite, (sfVector2f){MAP_WIDTH * 1.87,
-    MAP_HEIGHT * 1.75});
-    sfSprite_setScale(element->well.sprite, (sfVector2f){4, 4});
+    sfSprite_setPosition(element->well.sprite, (sfVector2f){MAP_WIDTH * 1.82,
+    MAP_HEIGHT * 1.755});
+    sfSprite_setScale(element->well.sprite, (sfVector2f){4, 4}); 
 }
