@@ -56,11 +56,11 @@ void inventory_off(game_t *g, G_menu_t *menu)
     }
     if (!finished)
         sfRenderWindow_setView(g->window, g->camera);
-    // if (sfTrue == sfKeyboard_isKeyPressed(sfKeyB)) {
-    //     wait_x_sec(0.1);
-    //     menu->on_off = ON;
-    //     start_game_menu(g, menu);
-    // }
+    if (sfTrue == sfKeyboard_isKeyPressed(sfKeyB)) {
+        wait_x_sec(0.1);
+        menu->on_off = ON;
+        start_game_menu(g, menu);
+    }
 }
 
 int game_update_map(game_t *g, G_menu_t *menu, level_t *level)

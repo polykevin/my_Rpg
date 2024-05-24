@@ -4,6 +4,7 @@
 ## File description:
 ## Makefile
 ##
+
 SRC    =	src/main.c										\
 			src/game/game.c									\
 			src/button.c 									\
@@ -21,6 +22,10 @@ SRC    =	src/main.c										\
 			src/map/inizialize/default_game.c				\
 			src/inventory/inizialize/inizialize_game_menu.c	\
 			src/inventory/handle_key.c						\
+			src/inventory/file.c							\
+			src/inventory/open_file.c						\
+			src/inventory/free_array.c						\
+			src/inventory/strtok_to_word_array.c			\
 			src/inventory/print_inventory.c					\
 			src/inventory/start_game_menu.c					\
 			src/utils.c 									\

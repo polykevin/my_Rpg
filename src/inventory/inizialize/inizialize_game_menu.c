@@ -13,10 +13,6 @@ static void malloc_struct(G_menu_t *menu)
     menu->words = malloc(sizeof(words_t) * 7);
 }
 
-static void inizialize_text_2(G_menu_t *menu)
-{
-}
-
 static void inzialize_text_2(G_menu_t *menu)
 {
     TEXT[4].text = sfText_create();
@@ -49,7 +45,7 @@ static void inzialize_text(G_menu_t *menu)
     sfText_setFont(TEXT[2].text, menu->font);
     sfText_setCharacterSize(TEXT[2].text, 30);
     TEXT[3].text = sfText_create();
-    sfText_setString(TEXT[3].text, "Option");
+    sfText_setString(TEXT[3].text, "Load");
     sfText_setFont(TEXT[3].text, menu->font);
     sfText_setCharacterSize(TEXT[3].text, 30);
     inzialize_text_2(menu);

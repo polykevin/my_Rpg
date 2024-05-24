@@ -6,6 +6,7 @@
 */
 
 #include "snow_header.h"
+#include "game.h"
 
 int menu_enter(G_menu_t *menu, level_t *level, game_t *game)
 {
@@ -13,6 +14,10 @@ int menu_enter(G_menu_t *menu, level_t *level, game_t *game)
         menu->bag = ON;
         print_inventory(menu, level, game);
     }
+    if (menu->menu_nb == 3)
+        load_file(&game->player);
+    if (menu->menu_nb == 4)
+        save_file(game->player);
     if (menu->menu_nb == 5)
         return FAIL;
     return (0);

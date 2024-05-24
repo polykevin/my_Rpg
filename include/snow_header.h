@@ -23,6 +23,7 @@
     #define EXIT_F 84
     #define SUCCESS 0
     #define FAIL -1
+    #define ERROR_INT -1
     #include <SFML/Graphics/RenderWindow.h>
     #include <SFML/Graphics.h>
     #include <SFML/Window.h>
@@ -59,5 +60,8 @@ void print_inventory(G_menu_t *menu, level_t *level, game_t *game);
 void destroy_inventory(Inventory_t *inventory);
 bool player_movement(game_t *g);
 int inventory_on(G_menu_t *menu, level_t *level, game_t *game);
+char *open_file(char const *filepath);
+void free_array(char **array);
+char **strtok_to_word_array(char *buffer, char const *separators);
 
 #endif /* LS_HEADER_H_ */
