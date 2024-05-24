@@ -18,7 +18,7 @@ static int free_inventory(Inventory_t *inventory)
 
 void destroy_game_menu(G_menu_t *menu)
 {
-    for (int i = 0; i != 5; i++)
+    for (int i = 0; i != 6; i++)
         sfRectangleShape_destroy(BACK[i].back);
     sfFont_destroy(menu->font);
     for (int i = 0; i != 6; i++)

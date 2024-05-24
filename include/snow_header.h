@@ -52,17 +52,16 @@ void idle_animation(level_t *level, game_t *g, int offset, int max);
 void map_movement(level_t *level, game_t *game, int direction);
 int check_contact(sfVector2f pos_1, sfRectangleShape *box_2);
 float time_as_seconds(sfClock *clock);
-void start_game_menu(game_t *game, G_menu_t *menu);
-void go_down(G_menu_t *menu);
-void go_up(G_menu_t *menu);
+void start_game_menu(game_t *game, G_menu_t *menu); 
 void default_game(level_t *level, G_menu_t *menu);
-void print_inventory(G_menu_t *menu, level_t *level, game_t *game);
-void print_stats(G_menu_t *menu, level_t *level, game_t *game);
+void print_inventory(G_menu_t *menu, level_t *level, game_t *game, int on);
 void destroy_inventory(Inventory_t *inventory);
 bool player_movement(game_t *g);
 int inventory_on(G_menu_t *menu, level_t *level, game_t *game);
 char *open_file(char const *filepath);
 void free_array(char **array);
 char **strtok_to_word_array(char *buffer, char const *separators);
+void go_down_m(G_menu_t *menu);
+void go_up_m(G_menu_t *menu);
 
 #endif /* LS_HEADER_H_ */

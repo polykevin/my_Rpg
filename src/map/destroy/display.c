@@ -24,6 +24,7 @@ void display_game_menu(game_t *game, G_menu_t *menu, level_t *level)
         if (menu->bag == ON) {
             sfRenderWindow_drawRectangleShape(WINDOW, BACK[3].back, NULL);
             sfRenderWindow_drawRectangleShape(WINDOW, BACK[4].back, NULL);
+            sfRenderWindow_drawRectangleShape(WINDOW, BACK[5].back, NULL);
             sfRenderWindow_drawText(WINDOW, TEXT[6].text, NULL);
             display_inventory(level->inventory, game);
         }

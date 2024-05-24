@@ -4,7 +4,6 @@
 ** File description:
 ** main file
 */
-#include "my.h"
 #include "snow_header.h"
 
 char *inv_atoi(int num)
@@ -18,7 +17,7 @@ char *inv_atoi(int num)
 
 static void create_text(G_menu_t *menu, Inventory_t *inventory)
 {
-    char *num = my_int_to_str(INV[0].nb);
+    char *num = inv_atoi(INV[0].nb);
 
     INV[0].name = sfText_create();
     sfText_setString(INV[0].name, const_inventory[INV[0].id]);
@@ -29,8 +28,9 @@ static void create_text(G_menu_t *menu, Inventory_t *inventory)
     free(num);
     sfText_setFont(INV[0].number, menu->font);
     sfText_setCharacterSize(INV[0].number, 30);
-    if (INV[0].next != NULL)
+    if (INV[0].next != NULL) {
         return (create_text(menu, INV[0].next));
+    }
 }
 
 static void pos_text(Inventory_t *inventory, sfVector2f c_pos)
@@ -44,13 +44,15 @@ static void pos_text(Inventory_t *inventory, sfVector2f c_pos)
         return (pos_text(INV[0].next, c_pos));
 }
 
-void print_inventory(G_menu_t *menu, level_t *level, game_t *game)
+void print_inventory(G_menu_t *menu, level_t *level, game_t *game, int on)
 {
     sfVector2f c_pos = sfView_getCenter(game->camera);
 
     c_pos.x = c_pos.x - 300;
     c_pos.y = c_pos.y - 100;
     create_text(menu, level->inventory);
+    if (on != FAIL)
+        sfRectangleShape_setPosition(BACK[5].back, c_pos);
     pos_text(level->inventory, c_pos);
 }
 

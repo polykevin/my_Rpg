@@ -28,9 +28,10 @@ void set_menu(G_menu_t *menu, sfVector2f c_pos)
     c_pos.x = c_pos.x + 576;
     c_pos.y = c_pos.y - 70;
     sfRectangleShape_setPosition(BACK[4].back, c_pos);
-    c_pos.x = c_pos.x + 25;
+    c_pos.x = c_pos.x + 5;
     c_pos.y = c_pos.y + 10;
     sfText_setPosition(TEXT[6].text, c_pos);
+    menu->bag_nb = 0;
 }
 
 void start_game_menu(game_t *game, G_menu_t *menu)

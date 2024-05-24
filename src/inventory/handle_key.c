@@ -12,7 +12,7 @@ int menu_enter(G_menu_t *menu, level_t *level, game_t *game)
 {
     if (menu->menu_nb == 0) {
         menu->bag = ON;
-        print_inventory(menu, level, game);
+        print_inventory(menu, level, game, SUCCESS);
     }
     if (menu->menu_nb == 3)
         load_file(&game->player);
@@ -23,7 +23,7 @@ int menu_enter(G_menu_t *menu, level_t *level, game_t *game)
     return (0);
 }
 
-void go_down(G_menu_t *menu)
+void go_down_m(G_menu_t *menu)
 {
     sfVector2f c_pos;
 
@@ -35,7 +35,7 @@ void go_down(G_menu_t *menu)
     }
 }
 
-void go_up(G_menu_t *menu)
+void go_up_m(G_menu_t *menu)
 {
     sfVector2f c_pos;
 
